@@ -1,3 +1,45 @@
-h1 {
-    color: red;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  max-width: 1200px;
+  height: 60px;
+  margin: 0 auto;
+  padding: 0 10px;
+  background-color: rgb(110, 110, 255);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  ul {
+    display: flex;
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-size: 22px;
+      font-weight: 600;
+      padding: 10px;
+      margin-right: 20px;
+
+      &.active {
+        color: black;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.body_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px dashed lightgray;
 }
