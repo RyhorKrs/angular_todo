@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
 })
 export class SignInComponent implements OnInit {
   form: FormGroup 
+  emailError: string = '';
+  passwordError: string = '';
 
   constructor(private router: Router) {}
 
@@ -18,11 +20,27 @@ export class SignInComponent implements OnInit {
         Validators.email, 
         Validators.required
       ]),
-      password: new FormControl(null, [
+      password: new FormControl('', [
         Validators.required, 
         Validators.minLength(8)
       ])
     })
+  }
+
+  getEmailErrorMessage(): void {
+    if(this.form.value.email.trim()) {
+      this.emailError = 'Not a valid email'
+    } else {
+      this.emailError = 'You must enter a value'
+    }
+  }
+
+  getPasswordErrorMessage(): void {
+    if(this.form.value.password.trim()) {
+      this.passwordError = 'Not a valid password'
+    } else {
+      this.passwordError = 'You must enter a value'
+    }
   }
 
   goToSignUpPage(): void {
@@ -32,6 +50,8 @@ export class SignInComponent implements OnInit {
   onSubmit(): void {
     if(this.form.valid) {
       console.log({...this.form.value});
+
+      this.form.reset();
     }
   }
 }
