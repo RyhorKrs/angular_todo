@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -8,6 +9,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
   form: FormGroup 
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -20,6 +23,10 @@ export class SignInComponent implements OnInit {
         Validators.minLength(8)
       ])
     })
+  }
+
+  goToSignUpPage(): void {
+    this.router.navigate(['/sign-up'])
   }
 
   onSubmit(): void {
