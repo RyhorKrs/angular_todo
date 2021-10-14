@@ -10,6 +10,8 @@
   margin: 0 auto;
   padding: 0 10px;
   background-color: rgb(110, 110, 255);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -40,5 +42,4 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px dashed lightgray;
 }

@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { PostsComponent } from './posts/posts.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -18,7 +18,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    PostsComponent,
+    TasksComponent,
     SignInComponent,
     SignUpComponent
   ],
