@@ -1,3 +1,28 @@
 <div class='page_body'>
-    <h1>SignIn Page!</h1>
+  <mat-card class='card'>
+    <mat-card-title class='title'>SignIn on AngularToDo</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]='form' (ngSubmit)='onSubmit()'>
+
+        
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" placeholder="pat@example.com" formControlName="email">
+          </mat-form-field>
+        
+        
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+        
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">SignIn</button>
+          <button mat-stroked-button type="button">Create new account</button>
+        </mat-card-actions>
+        
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
