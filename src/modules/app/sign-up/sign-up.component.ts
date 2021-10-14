@@ -17,7 +17,11 @@ export class SignUpComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.initForm();
+  }
+
+  private initForm(): void {
     this.form = new FormGroup({
       firstname: new FormControl('', [
         Validators.required,
@@ -42,47 +46,45 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  getFirstNameErrorMessage(): void {
+  public getFirstNameErrorMessage(): void {
     this.firstnameError = this.form.value.firstname.trim()
       ? 'Not a valid First Name'
       : 'You must enter a value'
   }
 
-  getLastNameErrorMessage(): void {
+  public getLastNameErrorMessage(): void {
     this.lastnameError = this.form.value.lastname.trim()
       ? 'Not a valid Last Name'
       : 'You must enter a value'
   }
 
-  getEmailErrorMessage(): void {
+  public getEmailErrorMessage(): void {
     this.emailError = this.form.value.email.trim()
       ? 'Not a valid Email'
       : 'You must enter a value'
   }
 
-  getPasswordErrorMessage(): void {
+  public getPasswordErrorMessage(): void {
     this.passwordError = this.form.value.password.trim()
       ? 'Not a valid Password'
       : 'You must enter a value'
   }
 
-  getConfirmPasswordErrorMessage(): void {
+  public getConfirmPasswordErrorMessage(): void {
     this.confirmPasswordError = this.form.value.confirmpassword !== this.form.value.password
       ? 'Value must be matched with Password'
       : 'You must enter a correct value of Password'
   }
 
-  goToSignInPage(): void {
+  public goToSignInPage(): void {
     this.router.navigate(['/sign-in']);
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.form.value.confirmpassword !== this.form.value.password) {
       this.getConfirmPasswordErrorMessage();
     } else if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
-      console.log({ ...this.form.value });
-
-      this.form.reset();
+      this.initForm();
     }
   }
 }

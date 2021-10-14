@@ -14,9 +14,16 @@ export class SignInComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.initForm();
+  }
+
+  private initForm(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required]),
+      email: new FormControl('', [
+        Validators.email, 
+        Validators.required
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -24,27 +31,26 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  getEmailErrorMessage(): void {
+
+  public getEmailErrorMessage(): void {
     this.emailError = this.form.value.email.trim()
       ? 'Not a valid email'
       : 'You must enter a value'
   }
 
-  getPasswordErrorMessage(): void {
+  public getPasswordErrorMessage(): void {
     this.passwordError = this.form.value.password.trim()
       ? 'Not a valid password'
       : 'You must enter a value'
   }
 
-  goToSignUpPage(): void {
+  public goToSignUpPage(): void {
     this.router.navigate(['/sign-up']);
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.form.valid) {
-      console.log({ ...this.form.value });
-
-      this.form.reset();
+      this.initForm();
     }
   }
 }
