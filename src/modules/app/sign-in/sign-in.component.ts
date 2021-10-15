@@ -1,24 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit {
-  form: FormGroup;
+export class SignInComponent{
+  public form: FormGroup;
   emailError: string = '';
   passwordError: string = '';
 
-  constructor(private router: Router) {}
-
-  public ngOnInit(): void {
-    this.initForm();
-  }
-
-  private initForm(): void {
+  constructor(public fb: FormBuilder) {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.email, 
@@ -30,7 +23,6 @@ export class SignInComponent implements OnInit {
       ]),
     });
   }
-
 
   public getEmailErrorMessage(): void {
     this.emailError = this.form.value.email.trim()
@@ -44,13 +36,10 @@ export class SignInComponent implements OnInit {
       : 'You must enter a value'
   }
 
-  public goToSignUpPage(): void {
-    this.router.navigate(['/sign-up']);
-  }
-
   public onSubmit(): void {
     if (this.form.valid) {
-      this.initForm();
+      console.log('asdasdasdasd')
+      this.form.reset(); 
     }
   }
 }
