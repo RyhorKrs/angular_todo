@@ -5,14 +5,16 @@
       <div [formGroup]='form'>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Email*</mat-label>
-            <input matInput type="text" placeholder="pat@example.com" formControlName="email" (blur)="getEmailErrorMessage()">
-            <mat-error>{{emailError}}</mat-error>
+            <input matInput type="text" placeholder="pat@example.com" formControlName="email">
+            <mat-error *ngIf="form.get('email').hasError('required')">You must enter a value</mat-error>
+            <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
           </mat-form-field>
         
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Password*</mat-label>
-            <input matInput type="password" formControlName="password" (blur)="getPasswordErrorMessage()">
-            <mat-error>{{passwordError}}</mat-error>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="form.get('password').hasError('required')">You must enter a value</mat-error>
+            <mat-error *ngIf="form.get('password').hasError('minlength')">Not a valid Password</mat-error>
           </mat-form-field>
         
         <mat-card-actions>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,9 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent{
-  public form: FormGroup;
-  emailError: string = '';
-  passwordError: string = '';
+  public form: FormGroup | any;
 
   constructor(public fb: FormBuilder) {
     this.form = new FormGroup({
@@ -24,21 +22,8 @@ export class SignInComponent{
     });
   }
 
-  public getEmailErrorMessage(): void {
-    this.emailError = this.form.value.email.trim()
-      ? 'Not a valid email'
-      : 'You must enter a value'
-  }
-
-  public getPasswordErrorMessage(): void {
-    this.passwordError = this.form.value.password.trim()
-      ? 'Not a valid password'
-      : 'You must enter a value'
-  }
-
   public onSubmit(): void {
     if (this.form.valid) {
-      console.log('asdasdasdasd')
       this.form.reset(); 
     }
   }
