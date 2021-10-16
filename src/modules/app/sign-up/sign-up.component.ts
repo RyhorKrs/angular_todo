@@ -28,10 +28,15 @@ export class SignUpComponent{
         Validators.minLength(8),
       ]),
       confirmpassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
+        Validators.required
       ]),
     });
+  }
+
+  public confirmPasswordValidator(): void {
+    this.form.value.password !== this.form.value.confirmpassword
+      ? this.form.controls.confirmpassword.setErrors({ nomatch: true })
+      : this.form.controls.confirmpassword.setErrors(null);
   }
 
   public onSubmit(): void {
