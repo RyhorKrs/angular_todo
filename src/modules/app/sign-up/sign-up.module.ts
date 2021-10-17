@@ -9,11 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { SignUpComponent } from './sign-up.component';
+import { PasswordStrengthComponent } from './password-strength/password-strength.component';
 
 
 @NgModule({
   declarations: [
-    SignUpComponent
+    [SignUpComponent, PasswordStrengthComponent]
   ],
   imports: [
     BrowserModule,

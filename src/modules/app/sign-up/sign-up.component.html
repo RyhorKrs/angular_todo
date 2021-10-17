@@ -4,6 +4,8 @@
     <mat-card-content>
       <div [formGroup]='form'>
 
+        <app-password-strength [ngStyle]="{opacity: showPassStrength ? '1' : '0'}"></app-password-strength>
+
         <div>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>First name*</mat-label>
@@ -29,7 +31,8 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Password*</mat-label>
-          <input matInput type="password" formControlName="password">
+          <input matInput type="password" formControlName="password" (focus)="showPassStrength = true" 
+          (blur)="showPassStrength = false">
           <mat-error *ngIf="form.get('password').hasError('required')">You should enter a value</mat-error>
           <mat-error *ngIf="form.get('password').hasError('minlength')">Not a valid Password</mat-error>
         </mat-form-field>  

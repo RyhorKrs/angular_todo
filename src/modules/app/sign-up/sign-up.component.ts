@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignUpComponent{
   public form: FormGroup | any;
+  public showPassStrength: boolean = false;
 
   constructor(public fb: FormBuilder) {
     this.form = new FormGroup({
