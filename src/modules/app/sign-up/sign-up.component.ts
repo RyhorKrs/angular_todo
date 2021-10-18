@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {Subject} from 'rxjs';
+import { REGS } from './../../../../src/shared/regs';
 
 @Component({
   selector: 'app-sign-up',
@@ -37,9 +38,7 @@ export class SignUpComponent implements OnInit{
   }
 
   public passwordInput(event: any): void {
-    console.log(event.target.value)
-    console.log(!!event.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/));
-    if(!!event.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) {
+    if(!!event.target.value.match(REGS.PASSWORD)) {
       this.form.controls.password.setErrors(null);
     } else {
       this.form.controls.password.setErrors({ nomatchReg: true });

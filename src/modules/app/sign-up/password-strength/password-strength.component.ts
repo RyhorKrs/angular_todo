@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { REGS } from './../../../../../src/shared/regs';
 
 @Component({
   selector: 'app-password-strength',
@@ -16,7 +17,6 @@ export class PasswordStrengthComponent implements OnInit {
   }
 
   public passwordStrength: number | any;
-
   public uppercaseMatchCompleted: boolean = false;
   public lowercaseMatchCompleted: boolean = false;
   public numberMatchCompleted: boolean = false;
@@ -33,44 +33,32 @@ export class PasswordStrengthComponent implements OnInit {
   }
 
   private uppercaseMatch(password: string): boolean {
-    this.uppercaseMatchCompleted = !!password.match(/(?=.*[A-Z])/);
+    this.uppercaseMatchCompleted = !!password.match(REGS.UPPER_CASE);
 
     return this.uppercaseMatchCompleted;
   }
 
   private lowercaseMatch(password: string): boolean {
-    this.lowercaseMatchCompleted = !!password.match(/(?=.*[a-z])/);
+    this.lowercaseMatchCompleted = !!password.match(REGS.LOWER_CASE);
 
     return this.lowercaseMatchCompleted;
   }
 
   private numberMatch(password: string): boolean {
-    this.numberMatchCompleted = !!password.match(/(?=.*\d)/);
+    this.numberMatchCompleted = !!password.match(REGS.NUMBER);
 
     return this.numberMatchCompleted;
   }
 
   private symbolMatch(password: string): boolean {
-    this.symbolMatchCompleted = !!password.match(/[!@#$%^&*(),.?":{}|<>]/);
+    this.symbolMatchCompleted = !!password.match(REGS.SYMBOL);
 
     return this.symbolMatchCompleted;
   }
 
   private lengthMatch(password: string): boolean {
-    this.lengthMatchCompleted = !!password.match(/[a-zA-Z\d@$#!%*?&^()-=_+]{8,}/);
+    this.lengthMatchCompleted = !!password.match(REGS.EIGHT_LENGTH);
 
     return this.lengthMatchCompleted;
   }
-
-  /* REGEX 
-  export const REGEX = {
-    LINK: /^[a-z0-9\-_+:/]+\.[a-z0-9. \-_+]+$/i,
-    EMAIL: /^[a-z0-9.\-_+]+@[a-z0-9\-_+]+\.[a-z0-9. \-_+]+$/i,
-    PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{9,})/,
-    UPPER_CASE: /(?=.*[A-Z])/,
-    LOWER_CASE: /(?=.*[a-z])/,
-    NINE_CHARACTERS: /[a-zA-Z\d@$#!%*?&^()-=_+]{9,}/,
-    NUMBER: /(?=.*\d)/,
-    SPECIAL_SYMBOL: /[!@#$%^&*(),.?":{}|<>]/
-  };*/
 }
