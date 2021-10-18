@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent{
+export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
 
-  constructor(public fb: FormBuilder) {
+  public stream$ = new Subject();
+
+  ngOnInit(): void {
     this.form = new FormGroup({
       firstname: new FormControl('', [
         Validators.required,
@@ -25,13 +28,24 @@ export class SignUpComponent{
         Validators.required
       ]),
       password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
+        Validators.required
       ]),
       confirmpassword: new FormControl('', [
         Validators.required
       ]),
     });
+  }
+
+  public passwordInput(event: any): void {
+    console.log(event.target.value)
+    console.log(!!event.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/));
+    if(!!event.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) {
+      this.form.controls.password.setErrors(null);
+    } else {
+      this.form.controls.password.setErrors({ nomatchReg: true });
+    }
+    
+    this.stream$.next(event.target.value)
   }
 
   public confirmPasswordValidator(): void {
