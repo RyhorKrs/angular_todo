@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/regs';
 
 @Component({
@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit{
 
   public stream$ = new Subject();
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       firstname: new FormControl('', [
         Validators.required,

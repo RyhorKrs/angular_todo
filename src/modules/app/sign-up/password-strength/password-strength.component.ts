@@ -10,13 +10,13 @@ import { REGS } from './../../../../../src/shared/regs';
 export class PasswordStrengthComponent implements OnInit {
   @Input() stream$: Subject<string> | any;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.stream$.subscribe((password:string)=> {
       this.checkPasswordStrength(password);
     })
   }
 
-  public passwordStrength: number | any;
+  public passwordStrength: number = 0;
   public uppercaseMatchCompleted: boolean = false;
   public lowercaseMatchCompleted: boolean = false;
   public numberMatchCompleted: boolean = false;
