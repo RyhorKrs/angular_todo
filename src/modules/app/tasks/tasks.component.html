@@ -2,6 +2,6 @@
   <div>
     <app-add-task-form (onAdd)="updateTasks($event)"></app-add-task-form>
     <hr>
-    <app-task-item *ngFor="let t of tasks" [task]="t"></app-task-item>
+    <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="removeTask($event)"></app-task-item>
   </div>
 </div>

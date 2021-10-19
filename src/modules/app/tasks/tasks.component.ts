@@ -20,4 +20,8 @@ export class TasksComponent {
   public updateTasks(task: Task) {
     this.tasks.push(task);
   }
+
+  public removeTask(title: string) {
+    this.tasks = this.tasks.filter(task => task.taskTitle !== title)
+  }
 }
