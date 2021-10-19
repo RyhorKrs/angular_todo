@@ -2,16 +2,16 @@
 <div class="add-task-form" [formGroup]='addTaskForm'>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Title*</mat-label>
-    <input matInput type="text" placeholder="Title..." formControlName="taskTitle">
+    <input matInput type="text" placeholder="Title..." formControlName="taskTitle" [(ngModel)]="title">
     <mat-error *ngIf="addTaskForm.get('taskTitle').hasError('required')">You should enter a value</mat-error>
   </mat-form-field>
         
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Description*</mat-label>
-    <input matInput type="text" formControlName="taskDescription">
+    <input matInput type="text"  placeholder="Description..." formControlName="taskDescription" [(ngModel)]="description">
     <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">You should enter a value</mat-error>
   </mat-form-field>
         
-  <button mat-raised-button color="primary" type="submit" [disabled]="addTaskForm.invalid">Add task</button>
+  <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">Add task</button>
         
 </div>

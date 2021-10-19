@@ -8,4 +8,7 @@ import { Task } from './../tasks.component';
 })
 export class TaskItemComponent {
   @Input() task: Task | any;
+
+
+  public delTask() {}
 }
