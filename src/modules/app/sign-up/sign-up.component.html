@@ -4,18 +4,20 @@
     <mat-card-content>
       <div [formGroup]='form'>
 
+        <app-password-strength [ngClass]="{open: showPassStrength}" [stream$]='stream$'></app-password-strength>
+
         <div>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>First name*</mat-label>
             <input matInput type="text" placeholder="Ivan" formControlName="firstname">
-            <mat-error *ngIf="form.get('firstname').hasError('required')">You must enter a value</mat-error>
+            <mat-error *ngIf="form.get('firstname').hasError('required')">You should enter a value</mat-error>
             <mat-error *ngIf="form.get('firstname').hasError('minlength')">Not a valid First Name</mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Last name*</mat-label>
             <input matInput type="text" placeholder="Ivanov" formControlName="lastname">
-            <mat-error *ngIf="form.get('lastname').hasError('required')">You must enter a value</mat-error>
+            <mat-error *ngIf="form.get('lastname').hasError('required')">You should enter a value</mat-error>
             <mat-error *ngIf="form.get('lastname').hasError('minlength')">Not a valid Last Name</mat-error>
           </mat-form-field>
         </div>
@@ -23,21 +25,23 @@
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Email*</mat-label>
           <input matInput type="text" placeholder="pat@example.com" formControlName="email">
-          <mat-error *ngIf="form.get('email').hasError('required')">You must enter a value</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('required')">You should enter a value</mat-error>
           <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
         </mat-form-field>  
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Password*</mat-label>
-          <input matInput type="password" formControlName="password">
-          <mat-error *ngIf="form.get('password').hasError('required')">You must enter a value</mat-error>
-          <mat-error *ngIf="form.get('password').hasError('minlength')">Not a valid Password</mat-error>
+          <input matInput type="password" formControlName="password" (focus)="showPassStrength = true" 
+          (blur)="showPassStrength = false" (input)="passwordInput($event)">
+          <mat-error *ngIf="form.get('password').hasError('required')">You should enter a value</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('nomatchReg')">Not a valid Password</mat-error>
         </mat-form-field>  
         
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Confirm password*</mat-label>
-          <input matInput type="password" formControlName="confirmpassword">
-          <mat-error>You must enter a correct value of Password</mat-error>
+          <input matInput type="password" formControlName="confirmpassword" (input)="confirmPasswordValidator()">
+          <mat-error *ngIf="form.get('confirmpassword').hasError('required')">You should enter a correct value of Password</mat-error>
+          <mat-error *ngIf="form.get('confirmpassword').hasError('nomatch')">Confirm password doesn't match with Password</mat-error>
         </mat-form-field>
 
         <mat-card-actions>
