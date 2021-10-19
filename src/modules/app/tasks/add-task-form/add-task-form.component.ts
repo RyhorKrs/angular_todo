@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Task } from './../tasks.component';
+import { Task } from './../../../../shared/interfaces/TASK';
 
 @Component({
   selector: 'app-add-task-form',

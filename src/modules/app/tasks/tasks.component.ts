@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface Task {
-  taskTitle: string,
-  taskDescription: string
-}
+import { Task } from './../../../shared/interfaces/TASK';
 
 @Component({
   selector: 'app-tasks',

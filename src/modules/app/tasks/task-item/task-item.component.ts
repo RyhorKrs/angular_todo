@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Task } from './../tasks.component';
+import { Task } from './../../../../shared/interfaces/TASK';
 
 @Component({
   selector: 'app-task-item',
