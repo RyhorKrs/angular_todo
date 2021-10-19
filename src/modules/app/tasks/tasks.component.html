@@ -2,8 +2,6 @@
   <div>
     <app-add-task-form></app-add-task-form>
     <hr>
-    <app-task-item></app-task-item>
-    <app-task-item></app-task-item>
-    <app-task-item></app-task-item>
+    <app-task-item *ngFor="let t of tasks" [task]="t"></app-task-item>
   </div>
 </div>
