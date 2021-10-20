@@ -1,0 +1,10 @@
+<mat-card class='card'>
+  <mat-card-title class='title'>{{task.taskTitle}}</mat-card-title>
+    <mat-card-content>
+      {{task.taskDescription}}
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="delTask()">Delete task</button>
+      </mat-card-actions>       
+  </mat-card-content>
+</mat-card>
+  

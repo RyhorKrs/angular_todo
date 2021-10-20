@@ -1,0 +1,11 @@
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  margin-bottom: 50px;
+
+  button {
+    min-width: 150px;
+    align-self: flex-end;
+  }
+}
