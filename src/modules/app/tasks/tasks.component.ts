@@ -8,9 +8,17 @@ import { Task } from './../../../shared/interfaces/TASK';
 })
 export class TasksComponent {
   public tasks: Task[] = [
-    {taskTitle: 'First task', taskDescription: 'asdasasd awdasd asdas ad fsd da dad adassd asd dw da'},
-    {taskTitle: 'Second task', taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da'},
-    {taskTitle: 'Third task', taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da'}
+    {
+      taskTitle: 'First task', 
+      taskDescription: 'asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
+    },
+    {
+      taskTitle: 'Second task', 
+      taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
+    },
+    {
+      taskTitle: 'Third task', taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
+    }
   ]
 
   public updateTasks(task: Task) {

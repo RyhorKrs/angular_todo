@@ -21,7 +21,7 @@ export class AddTaskFormComponent implements OnInit{
     });
   }
 
-  addTask() {
+  public addTask() {
     const task: Task = {
       taskTitle: this.title,
       taskDescription: this.description
