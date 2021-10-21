@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { REGS } from './../../../../src/shared/regs';
+import { REGS } from './../../../../src/shared/constants/regs';
 import { NewUser } from './../../../../src/shared/interfaces/NEWUSER';
 import { Router } from '@angular/router';
 
