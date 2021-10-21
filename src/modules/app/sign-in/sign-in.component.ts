@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CheckSignInUser } from 'src/shared/services/checkSignInUser.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,8 +10,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignInComponent{
   public form: FormGroup | any;
+  public showSignInError: boolean = false;
 
-  constructor(public fb: FormBuilder) {
+  constructor(private router: Router, private checkUserService: CheckSignInUser) {}
+
+  public ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.email, 
@@ -24,7 +29,16 @@ export class SignInComponent{
 
   public onSubmit(): void {
     if (this.form.valid) {
-      this.form.reset(); 
+
+      if(this.checkUserService.checkUser(this.form.value.email, this.form.value.password)) {
+        localStorage.setItem('currentUser', JSON.stringify(this.form.value.email));
+        this.showSignInError = false;
+        this.router.navigate(['/tasks']);
+        this.form.reset();
+      } else {
+        this.showSignInError = true;
+        this.form.reset();
+      }
     }
   }
 }
