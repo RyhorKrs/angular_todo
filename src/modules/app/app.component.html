@@ -1,9 +1,11 @@
 <nav class='navbar'>
   <ul>
-    <li><a routerLink='/' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>Home</a></li>
-    <li><a routerLink='/tasks' routerLinkActive='active'>Tasks</a></li>
-    <li><a routerLink='/sign-in' routerLinkActive='active'>SignIn</a></li>
-    <li><a routerLink='/sign-up' routerLinkActive='active'>SignUp</a></li>
+    <li>
+      <a routerLink='/' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
+        <img src="./../../assets/images/angulartodo-logo.jpg" alt="appLogo">
+      </a>
+    </li>
+    <li><a mat-raised-button routerLink='/sign-in' routerLinkActive='active'>SignIn</a></li>
   </ul>
 </nav>
 

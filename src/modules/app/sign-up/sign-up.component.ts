@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/regs';
+import { NewUser } from './../../../../src/shared/interfaces/NEWUSER';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +15,8 @@ export class SignUpComponent implements OnInit{
   public showPassStrength: boolean = false;
 
   public stream$ = new Subject();
+
+  constructor(private router: Router) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -55,7 +59,18 @@ export class SignUpComponent implements OnInit{
 
   public onSubmit(): void {
     if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
+      const newUser: NewUser = {
+        newUserFirstName: this.form.value.firstname,
+        newUserLastName: this.form.value.lastname,
+        newUserEmail: this.form.value.email,
+        newUserPassword: this.form.value.password
+      }
+
+      localStorage.setItem('newUser', JSON.stringify(newUser));
+
       this.form.reset();
+
+      this.router.navigate(['/sign-up-redirect']);
     }
   }
 }
