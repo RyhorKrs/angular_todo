@@ -3,19 +3,21 @@
     <mat-card-title class='title'>SignIn on AngularToDo</mat-card-title>
     <mat-card-content>
       <div [formGroup]='form'>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Email*</mat-label>
-            <input matInput type="text" placeholder="pat@example.com" formControlName="email">
-            <mat-error *ngIf="form.get('email').hasError('required')">You should enter a value</mat-error>
-            <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
-          </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email*</mat-label>
+          <input matInput type="text" placeholder="pat@example.com" formControlName="email">
+          <mat-error *ngIf="form.get('email').hasError('required')">You should enter a value</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
+        </mat-form-field>
         
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Password*</mat-label>
-            <input matInput type="password" formControlName="password">
-            <mat-error *ngIf="form.get('password').hasError('required')">You should enter a value</mat-error>
-            <mat-error *ngIf="form.get('password').hasError('minlength')">Not a valid Password</mat-error>
-          </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password*</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="form.get('password').hasError('required')">You should enter a value</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('minlength')">Not a valid Password</mat-error>
+        </mat-form-field>
+
+        <mat-error class="sign-in-error" [ngClass]="{open: showSignInError}">Not a valid Email or Password</mat-error>
         
         <mat-card-actions>
           <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">SignIn</button>

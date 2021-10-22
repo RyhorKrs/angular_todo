@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { REGS } from './../../../../../src/shared/regs';
+import { REGS } from '../../../../shared/constants/regs';
 
 @Component({
   selector: 'app-password-strength',

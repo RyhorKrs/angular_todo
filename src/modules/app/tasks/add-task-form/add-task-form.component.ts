@@ -11,8 +11,6 @@ export class AddTaskFormComponent implements OnInit{
   @Output() onAdd: EventEmitter<Task> = new EventEmitter<Task>();
 
   public addTaskForm: FormGroup | any;
-  public title: string = '';
-  public description: string = '';
 
   public ngOnInit(): void {
     this.addTaskForm = new FormGroup({
@@ -23,8 +21,8 @@ export class AddTaskFormComponent implements OnInit{
 
   public addTask() {
     const task: Task = {
-      taskTitle: this.title,
-      taskDescription: this.description
+      taskTitle: this.addTaskForm.value.taskTitle,
+      taskDescription: this.addTaskForm.value.taskDescription
     }
 
     this.onAdd.emit(task);

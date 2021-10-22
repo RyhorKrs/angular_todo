@@ -16,6 +16,14 @@
         width: 300px;
       }
 
+      .sign-in-error {
+        display: none;
+
+        &.open {
+          display: block;
+        }
+      }
+
       mat-card-actions {
         display: flex;
         flex-direction: column;

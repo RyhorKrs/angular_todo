@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { SignInComponent } from './sign-in.component';
-
+import { CheckSignInUser } from 'src/shared/services/checkSignInUser.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { SignInComponent } from './sign-in.component';
     MatButtonModule, 
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [CheckSignInUser],
   bootstrap: [SignInComponent]
 })
 export class SignInModule { }
