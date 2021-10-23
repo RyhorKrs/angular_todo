@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/constants/regs';
 import { User } from './../../../../src/shared/interfaces/USER';
-import { Router } from '@angular/router';
+import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
+  providers: [LocalStorageService]
 })
 export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
@@ -16,7 +18,10 @@ export class SignUpComponent implements OnInit{
 
   public stream$ = new Subject<string>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -69,9 +74,9 @@ export class SignUpComponent implements OnInit{
         userLastName: this.form.value.lastname,
         userEmail: this.form.value.email,
         userPassword: this.form.value.password
-      }
-
-      localStorage.setItem('newUser', JSON.stringify(newUser));
+      };
+      
+      this.localStorageService.setItem('newUser', JSON.stringify(newUser));
 
       this.form.reset();
 
