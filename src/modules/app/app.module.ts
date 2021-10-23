@@ -8,6 +8,8 @@ import { HomeModule } from './home/home.module';
 import { TasksModule } from './tasks/tasks.module';
 import { SignInModule } from './sign-in/sign-in.module';
 import { SignUpModule } from './sign-up/sign-up.module';
+import { SignUpRedirectModule } from './sign-up-redirect/sign-up-redirect.module';
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SignUpModule } from './sign-up/sign-up.module';
     HomeModule,
     TasksModule,
     SignInModule,
-    SignUpModule
+    SignUpModule,
+    SignUpRedirectModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

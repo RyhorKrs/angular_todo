@@ -11,7 +11,7 @@ import { TasksComponent } from './tasks.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 
-
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { TaskItemComponent } from './task-item/task-item.component';
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [TasksComponent]

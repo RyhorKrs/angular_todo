@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { SignInComponent } from './sign-in.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SignInComponent } from './sign-in.component';
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [SignInComponent]

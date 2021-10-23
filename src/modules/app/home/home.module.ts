@@ -4,6 +4,7 @@ import { AppRoutingModule } from './../app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 
 import { HomeComponent } from './home.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HomeComponent } from './home.component';
   imports: [
     BrowserModule, 
     AppRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [HomeComponent]

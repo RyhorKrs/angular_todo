@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { SignUpRedirectComponent } from './sign-up-redirect.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 
@@ -10,9 +11,10 @@ import { SignUpRedirectComponent } from './sign-up-redirect.component';
     SignUpRedirectComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [SignUpRedirectComponent]
 })
-export class TasksModule { }
+export class SignUpRedirectModule { }
