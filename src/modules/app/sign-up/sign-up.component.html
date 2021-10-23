@@ -24,9 +24,9 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Email*</mat-label>
-          <input matInput type="text" placeholder="pat@example.com" formControlName="email">
+          <input matInput type="text" placeholder="pat@example.com" formControlName="email" (input)="emailValidator()">
           <mat-error *ngIf="form.get('email').hasError('required')">You should enter a value</mat-error>
-          <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('nomatchReg')">Not a valid Email</mat-error>
         </mat-form-field>  
 
         <mat-form-field class="example-full-width" appearance="fill">

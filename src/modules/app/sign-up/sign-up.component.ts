@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/constants/regs';
-import { NewUser } from './../../../../src/shared/interfaces/NEWUSER';
+import { User } from './../../../../src/shared/interfaces/USER';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
 
-  public stream$ = new Subject();
+  public stream$ = new Subject<string>();
 
   constructor(private router: Router) {}
 
@@ -28,10 +28,7 @@ export class SignUpComponent implements OnInit{
         Validators.required,
         Validators.minLength(3),
       ]),
-      email: new FormControl('', [
-        Validators.email, 
-        Validators.required
-      ]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [
         Validators.required
       ]),
@@ -57,13 +54,21 @@ export class SignUpComponent implements OnInit{
       : this.form.controls.confirmpassword.setErrors(null);
   }
 
+  public emailValidator(): void {
+    if(!!this.form.value.email.match(REGS.EMAIL)) {
+      this.form.controls.email.setErrors(null);
+    } else {
+      this.form.controls.email.setErrors({ nomatchReg: true });
+    }
+  }
+
   public onSubmit(): void {
     if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
-      const newUser: NewUser = {
-        newUserFirstName: this.form.value.firstname,
-        newUserLastName: this.form.value.lastname,
-        newUserEmail: this.form.value.email,
-        newUserPassword: this.form.value.password
+      const newUser: User = {
+        userFirstName: this.form.value.firstname,
+        userLastName: this.form.value.lastname,
+        userEmail: this.form.value.email,
+        userPassword: this.form.value.password
       }
 
       localStorage.setItem('newUser', JSON.stringify(newUser));

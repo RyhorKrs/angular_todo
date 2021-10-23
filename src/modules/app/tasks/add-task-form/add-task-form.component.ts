@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Task } from './../../../../shared/interfaces/TASK';
 
@@ -19,11 +19,11 @@ export class AddTaskFormComponent implements OnInit{
     });
   }
 
-  public addTask() {
+  public addTask(): void {
     const task: Task = {
       taskTitle: this.addTaskForm.value.taskTitle,
       taskDescription: this.addTaskForm.value.taskDescription
-    }
+    };
 
     this.onAdd.emit(task);
 

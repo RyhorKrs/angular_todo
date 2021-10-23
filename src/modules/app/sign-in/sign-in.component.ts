@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CheckSignInUser } from 'src/shared/services/checkSignInUser.service';
+import { REGS } from './../../../../src/shared/constants/regs';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,15 +17,20 @@ export class SignInComponent{
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [
-        Validators.email, 
-        Validators.required
-      ]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
     });
+  }
+
+  public emailValidator(): void {
+    if(!!this.form.value.email.match(REGS.EMAIL)) {
+      this.form.controls.email.setErrors(null);
+    } else {
+      this.form.controls.email.setErrors({ nomatchReg: true });
+    }
   }
 
   public onSubmit(): void {
