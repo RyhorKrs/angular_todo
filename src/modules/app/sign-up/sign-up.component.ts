@@ -9,8 +9,7 @@ import { LocalStorageService } from './../../../../src/shared/services/localStor
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
-  providers: [LocalStorageService]
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit{
   public form: FormGroup | any;

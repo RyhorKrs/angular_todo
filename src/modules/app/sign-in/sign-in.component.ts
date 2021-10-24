@@ -8,8 +8,7 @@ import { REGS } from './../../../../src/shared/constants/regs';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss'],
-  providers: [CheckSignInUser, LocalStorageService]
+  styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent{
   public form: FormGroup | any;
