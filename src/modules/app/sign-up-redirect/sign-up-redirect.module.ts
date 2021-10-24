@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { SignUpRedirectComponent } from './sign-up-redirect.component';
-import { SharedModule } from 'src/shared/shared.module';
+import { HeaderModule } from './../header/header.module';
 
 
 
@@ -12,7 +12,7 @@ import { SharedModule } from 'src/shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    SharedModule
+    HeaderModule
   ],
   providers: [],
   bootstrap: [SignUpRedirectComponent]

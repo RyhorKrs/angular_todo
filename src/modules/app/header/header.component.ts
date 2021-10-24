@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/shared/services/localStorage.service';
+import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
 
 @Component({
   selector: 'app-header',

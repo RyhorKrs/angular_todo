@@ -5,30 +5,32 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 
-import { SharedModule } from 'src/shared/shared.module';
+import { HeaderModule } from './../header/header.module';
 
 @NgModule({
   declarations: [
-    [TasksComponent, AddTaskFormComponent, TaskItemComponent]
+    TasksComponent, 
+    AddTaskFormComponent, 
+    TaskItemComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
-    ReactiveFormsModule, 
-    MatCardModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     BrowserAnimationsModule,
-    SharedModule
+    HeaderModule,
   ],
   providers: [],
-  bootstrap: [TasksComponent]
+  bootstrap: [TasksComponent],
 })
-export class TasksModule { }
+export class TasksModule {}

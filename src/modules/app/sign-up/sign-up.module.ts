@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { SignUpComponent } from './sign-up.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
-import { SharedModule } from 'src/shared/shared.module';
+import { HeaderModule } from './../header/header.module';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { SharedModule } from 'src/shared/shared.module';
     MatInputModule, 
     MatButtonModule, 
     BrowserAnimationsModule,
-    SharedModule
+    HeaderModule
   ],
   providers: [],
   bootstrap: [SignUpComponent]

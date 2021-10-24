@@ -3,21 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './../app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 
-import { HomeComponent } from './home.component';
-import { HeaderModule } from '../header/header.module';
+import { HeaderComponent } from './header.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HeaderComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
-    MatButtonModule,
-    HeaderModule
+    MatButtonModule
   ],
-  providers: [],
-  bootstrap: [HomeComponent]
+  exports: [
+    HeaderComponent
+  ]
 })
-export class HomeModule { }
+export class HeaderModule {}
