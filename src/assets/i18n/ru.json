@@ -1,13 +1,58 @@
 {
-  "header": {
-    "sign-in": "Войти",
-    "signed-in-as": "Вошел как {{currentUser}}",
-    "blank-link": "Что-то сделать",
-    "logout": "Выйти"
+  "titles": {
+    "home-page": "Приведи все в порядок с AngularToDo",
+    "sign-in-page": "Вход в AngularToDo",
+    "sign-up-page": "Регистрация в AngularToDo",
+    "sign-up-redirect-page": "Вы успешно прошли регистрацию!!!",
+    "tasks-page": "Добавьте несколько задач!"
   },
-  "home-page": {
-    "title": "Приведите все в порядок с AngularToDo",
-    "subtitle": "Обретите ясность и спокойствие - переместите свои задачи из головы в список дел (независимо от того, где вы находитесь и какое устройство используете).",
-    "start-now": "Начни сейчас"
+  "form-field-label": {
+    "email": "Эл. почта*",
+    "password": "Пароль*",
+    "confirm-password": "Подтвердите пароль*",
+    "first-name": "Имя*",
+    "last-name": "Фамилия*",
+    "title": "Название*",
+    "description": "Описание*"
+  },
+  "placeholders": {
+    "email": "example@mail.ru",
+    "first-name": "Иван",
+    "last-name": "Иванов",
+    "title": "Название...",
+    "description": "Описание..."
+  },
+  "buttons": {
+    "sign-in": "Войти",
+    "logout": "Выйти",
+    "sign-up": "Зарегистрироваться",
+    "blank-link": "Сделать что-то",
+    "start-now": "Начни сейчас",
+    "create-new-acc": "Создать новый аккаунт",
+    "have-acc": "У Вас уже есть аккаунт?",
+    "add-task": "Добавить задачу",
+    "delete-task": "Удалить задачу"
+  },
+  "errors": {
+    "required": "Поле должно быть заполнено",
+    "not-valid": "Некорректные данные",
+    "not-valid-data": "Некорректная эл. почта или пароль"
+  },
+  "messages": {
+    "signed-in-as": "Вошли как {{user}}",
+    "password-strength-title": "Ваш пароль должен содержать как минимум:",
+    "uppercase-letter": "1 заглавну букву;",
+    "lowercase-letter": "1 строчную букву;",
+    "number": "1 цифру;",
+    "symbol": "1 специальный символ;",
+    "length": "и быть 8 и более символов в длинну;",
+    "weak": "Слабый",
+    "moderate": "Умеренный",
+    "strong": "Сильный",
+    "very-strong": "Очень сильный",
+    "complete": "Выполнено"
+  },
+  "content": {
+    "home-page-subtitle": "Обретите ясность и спокойствие - переместите свои задачи из головы в список дел (независимо от того, где вы находитесь и какое устройство используете)."
   }
 }
