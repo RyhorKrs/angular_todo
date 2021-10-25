@@ -1,17 +1,17 @@
-<h1 class='title'>{{ 'tasks-page.add-task' | translate }}!</h1>
+<h1 class='title'>{{ 'titles.tasks-page' | translate }}</h1>
 <div class="add-task-form" [formGroup]='addTaskForm'>
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>{{ 'tasks-page.title-formfield' | translate }}</mat-label>
-    <input matInput type="text" placeholder="{{ 'tasks-page.title-placeholder' | translate }}" formControlName="taskTitle">
-    <mat-error *ngIf="addTaskForm.get('taskTitle').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+    <mat-label>{{ 'form-field-label.title' | translate }}</mat-label>
+    <input matInput type="text" placeholder="{{ 'placeholders.title' | translate }}" formControlName="taskTitle">
+    <mat-error *ngIf="addTaskForm.get('taskTitle').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
   </mat-form-field>
         
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>{{ 'tasks-page.desc-formfield' | translate }}</mat-label>
-    <input matInput type="text"  placeholder="{{ 'tasks-page.desc-placeholder' | translate }}" formControlName="taskDescription">
-    <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+    <mat-label>{{ 'form-field-label.description' | translate }}</mat-label>
+    <input matInput type="text"  placeholder="{{ 'placeholders.description' | translate }}" formControlName="taskDescription">
+    <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
   </mat-form-field>
         
-  <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">{{ 'tasks-page.add-task' | translate }}</button>
+  <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">{{ 'buttons.add-task' | translate }}</button>
         
 </div>

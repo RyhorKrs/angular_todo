@@ -1,42 +1,49 @@
 {
+  "titles": {
+    "home-page": "Get everything in order with AngularToDo",
+    "sign-in-page": "SignIn on AngularToDo",
+    "sign-up-page": "SignUp on AngularToDo",
+    "sign-up-redirect-page": "You have successfully registered!!!",
+    "tasks-page": "Add few tasks!"
+  },
+  "form-field-label": {
+    "email": "Email*",
+    "password": "Password*",
+    "confirm-password": "Confirm password*",
+    "first-name": "First name*",
+    "last-name": "Last name*",
+    "title": "Title*",
+    "description": "Description*"
+  },
+  "placeholders": {
+    "email": "example@mail.ru",
+    "first-name": "Ivan",
+    "last-name": "Ivanov",
+    "title": "Title...",
+    "description": "Description..."
+  },
   "buttons": {
     "sign-in": "SignIn",
     "logout": "Logout",
-    "sign-up": "SignUp"
-  },
-  "header": {
-    "signed-in-as": "Signed in as {{user}}",
+    "sign-up": "SignUp",
     "blank-link": "DO SMTH",
-    "logout": "Logout"
+    "start-now": "Start now",
+    "create-new-acc": "Create new account",
+    "have-acc": "Do you have an account?",
+    "add-task": "Add task",
+    "delete-task": "Delete task"
   },
-  "home-page": {
-    "title": "Get everything in order with AngularToDo",
-    "subtitle": "Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use).",
-    "start-now": "Start now"
+  "errors": {
+    "required": "You should enter a value",
+    "not-valid": "Not a valid value",
+    "not-valid-data": "Not a valid Email or Password"
   },
-  "sign-in-page": {
-    "title": "SignIn on AngularToDo",
-    "email": "Email*",
-    "password": "Password*",
-    "error-required": "You should enter a value",
-    "error-novalid": "Not a valid value",
-    "error-novaliddata": "Not a valid Email or Password",
-    "create-new-acc": "Create new account"
-  },
-  "sign-up-page": {
-    "title": "SignUp on AngularToDo",
-    "fname-formfield": "First name*",
-    "fname-placeholder": "Ivan",
-    "lname-formfield": "Last name*",
-    "lname-placeholder": "Ivanov",
-    "confirm-pass": "Confirm password*",
-    "have-acc": "Do you have an account?"
-  },
-  "password-strength": {
-    "title": "Your password should contain at least:",
-    "upper-letter": "1 uppercase letter;",
-    "lower-letter": "1 lowercase letter;",
-    "numb": "1 number;",
+  "messages": {
+    "signed-in-as": "Signed in as {{user}}",
+    "password-strength-title": "Your password should contain at least:",
+    "uppercase-letter": "1 uppercase letter;",
+    "lowercase-letter": "1 lowercase letter;",
+    "number": "1 number;",
     "symbol": "1 special symbol;",
     "length": "and be 8 symbols long or more;",
     "weak": "Weak",
@@ -45,15 +52,7 @@
     "very-strong": "Very strong",
     "complete": "Complete"
   },
-  "sign-up-redirect-page": {
-    "title": "You have successfully registered!!!" 
-  },
-  "tasks-page": {
-    "add-task": "Add task",
-    "title-formfield": "Title*",
-    "title-placeholder": "Title...",
-    "desc-formfield": "Description*",
-    "desc-placeholder": "Description...",
-    "del-task": "Delete task"
+  "content": {
+    "home-page-subtitle": "Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use)."
   }
 }
