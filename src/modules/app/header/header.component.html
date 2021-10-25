@@ -5,18 +5,18 @@
         <img class='logo' src='./../../../assets/images/angulartodo-logo.png' alt='appLogo'>
       </a>
     </li>
-    <li *ngIf='!isSignIn'><a mat-raised-button routerLink='/sign-in'>SignIn</a></li>
+    <li *ngIf='!isSignIn'><a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a></li>
     <li *ngIf='isSignIn' class='sign-in-li'>
       <img class='user-avatar' src='./../../../assets/images/anonymous-user.png' alt='User avatar' (click)='toggleUserMenu()'>
       <div *ngIf='showUserMenu' class='user-menu-body'>
         <mat-card>
           <ul>
-            <li class='user-email-li'>Signed in as {{currentUser}}</li>
+            <li class='user-email-li'>{{ 'header.signed-in-as' | translate: {user: currentUser} }}</li>
             <hr>
-            <li><a mat-button href='#'>Do smth 1</a></li>
-            <li><a mat-button href='#'>Do smth 2</a></li>
+            <li><a mat-button href='#'>{{ 'header.blank-link' | translate }}</a></li>
+            <li><a mat-button href='#'>{{ 'header.blank-link' | translate }}</a></li>
             <hr>
-            <li><button mat-button color='warn' (click)='logoutUser()'>Logout</button></li>
+            <li><button mat-button color='warn' (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button></li>
           </ul>
         </mat-card>
       </div>

@@ -1,17 +1,17 @@
-<h1 class='title'>Add task!</h1>
+<h1 class='title'>{{ 'tasks-page.add-task' | translate }}!</h1>
 <div class="add-task-form" [formGroup]='addTaskForm'>
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Title*</mat-label>
-    <input matInput type="text" placeholder="Title..." formControlName="taskTitle">
-    <mat-error *ngIf="addTaskForm.get('taskTitle').hasError('required')">You should enter a value</mat-error>
+    <mat-label>{{ 'tasks-page.title-formfield' | translate }}</mat-label>
+    <input matInput type="text" placeholder="{{ 'tasks-page.title-placeholder' | translate }}" formControlName="taskTitle">
+    <mat-error *ngIf="addTaskForm.get('taskTitle').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
   </mat-form-field>
         
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Description*</mat-label>
-    <input matInput type="text"  placeholder="Description..." formControlName="taskDescription">
-    <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">You should enter a value</mat-error>
+    <mat-label>{{ 'tasks-page.desc-formfield' | translate }}</mat-label>
+    <input matInput type="text"  placeholder="{{ 'tasks-page.desc-placeholder' | translate }}" formControlName="taskDescription">
+    <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
   </mat-form-field>
         
-  <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">Add task</button>
+  <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">{{ 'tasks-page.add-task' | translate }}</button>
         
 </div>

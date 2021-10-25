@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class='page_body'>
-  <h1>Get everything in order with AngularToDo</h1>
-  <p>Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use).</p>
-  <button mat-raised-button color="primary" routerLink='/sign-in'>Start now</button>
+  <h1>{{ 'home-page.title' | translate }}</h1>
+  <p>{{ 'home-page.subtitle' | translate }}</p>
+  <button mat-raised-button color="primary" routerLink='/sign-in'>{{ 'home-page.start-now' | translate }}</button>
 </div>
