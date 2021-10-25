@@ -9,6 +9,9 @@ import { LocalStorageService } from './../../../../src/shared/services/localStor
 })
 export class HeaderComponent {
   public isSignIn: boolean = this.localStorageService.getItem('currentUser') ? true : false;
+  public showUserMenu: boolean = false;
+
+  public currentUser: string | null = this.localStorageService.getItem('currentUser');
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -18,5 +21,9 @@ export class HeaderComponent {
   public logoutUser() {
     this.localStorageService.removeItem('currentUser');
     this.router.navigate(['/sign-in']);
+  }
+
+  public toggleUserMenu():void {
+    this.showUserMenu = !this.showUserMenu;
   }
 }
