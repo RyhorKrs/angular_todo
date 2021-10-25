@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/constants/regs';
-import { NewUser } from './../../../../src/shared/interfaces/NEWUSER';
-import { Router } from '@angular/router';
+import { User } from './../../../../src/shared/interfaces/USER';
+import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
 
-  public stream$ = new Subject();
+  public stream$ = new Subject<string>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -29,8 +33,8 @@ export class SignUpComponent implements OnInit{
         Validators.minLength(3),
       ]),
       email: new FormControl('', [
-        Validators.email, 
-        Validators.required
+        Validators.required, 
+        Validators.pattern(REGS.EMAIL)
       ]),
       password: new FormControl('', [
         Validators.required
@@ -59,14 +63,14 @@ export class SignUpComponent implements OnInit{
 
   public onSubmit(): void {
     if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
-      const newUser: NewUser = {
-        newUserFirstName: this.form.value.firstname,
-        newUserLastName: this.form.value.lastname,
-        newUserEmail: this.form.value.email,
-        newUserPassword: this.form.value.password
-      }
-
-      localStorage.setItem('newUser', JSON.stringify(newUser));
+      const newUser: User = {
+        userFirstName: this.form.value.firstname,
+        userLastName: this.form.value.lastname,
+        userEmail: this.form.value.email,
+        userPassword: this.form.value.password
+      };
+      
+      this.localStorageService.setItem('newUser', JSON.stringify(newUser));
 
       this.form.reset();
 

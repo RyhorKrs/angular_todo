@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './../app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { SignInComponent } from './sign-in.component';
-import { HeaderModule } from './../header/header.module';
+import { HeaderComponent } from './header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -21,19 +16,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    SignInComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    MatCardModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
-    BrowserAnimationsModule,
-    HeaderModule,
+    AppRoutingModule,
+    MatButtonModule,
+    MatCardModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -44,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'en'
     })
   ],
-  providers: [],
-  bootstrap: [SignInComponent]
+  exports: [
+    HeaderComponent
+  ]
 })
-export class SignInModule { }
+export class HeaderModule {}

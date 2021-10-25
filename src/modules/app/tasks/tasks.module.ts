@@ -5,29 +5,47 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskItemComponent } from './task-item/task-item.component';
+import { HeaderModule } from './../header/header.module';
 
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
-    [TasksComponent, AddTaskFormComponent, TaskItemComponent]
+    TasksComponent, 
+    AddTaskFormComponent, 
+    TaskItemComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
-    ReactiveFormsModule, 
-    MatCardModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
-    BrowserAnimationsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    HeaderModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en'
+    })
   ],
   providers: [],
-  bootstrap: [TasksComponent]
+  bootstrap: [TasksComponent],
 })
-export class TasksModule { }
+export class TasksModule {}

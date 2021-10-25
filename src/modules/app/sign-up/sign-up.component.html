@@ -1,6 +1,8 @@
+<app-header></app-header>
+
 <div class='page_body'>
   <mat-card class='card'>
-    <mat-card-title class='title'>SignUp on AngularToDo</mat-card-title>
+    <mat-card-title class='title'>{{ 'sign-up-page.title' | translate }}</mat-card-title>
     <mat-card-content>
       <div [formGroup]='form'>
 
@@ -8,45 +10,45 @@
 
         <div>
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>First name*</mat-label>
-            <input matInput type="text" placeholder="Ivan" formControlName="firstname">
-            <mat-error *ngIf="form.get('firstname').hasError('required')">You should enter a value</mat-error>
-            <mat-error *ngIf="form.get('firstname').hasError('minlength')">Not a valid First Name</mat-error>
+            <mat-label>{{ 'sign-up-page.fname-formfield' | translate }}</mat-label>
+            <input matInput type="text" placeholder="{{ 'sign-up-page.fname-placeholder' | translate }}" formControlName="firstname">
+            <mat-error *ngIf="form.get('firstname').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+            <mat-error *ngIf="form.get('firstname').hasError('minlength')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Last name*</mat-label>
-            <input matInput type="text" placeholder="Ivanov" formControlName="lastname">
-            <mat-error *ngIf="form.get('lastname').hasError('required')">You should enter a value</mat-error>
-            <mat-error *ngIf="form.get('lastname').hasError('minlength')">Not a valid Last Name</mat-error>
+            <mat-label>{{ 'sign-up-page.lname-formfield' | translate }}</mat-label>
+            <input matInput type="text" placeholder="{{ 'sign-up-page.lname-placeholder' | translate }}" formControlName="lastname">
+            <mat-error *ngIf="form.get('lastname').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+            <mat-error *ngIf="form.get('lastname').hasError('minlength')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
           </mat-form-field>
         </div>
 
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Email*</mat-label>
+          <mat-label>{{ 'sign-in-page.email' | translate }}</mat-label>
           <input matInput type="text" placeholder="pat@example.com" formControlName="email">
-          <mat-error *ngIf="form.get('email').hasError('required')">You should enter a value</mat-error>
-          <mat-error *ngIf="form.get('email').hasError('email')">Not a valid Email</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('pattern')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
         </mat-form-field>  
 
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Password*</mat-label>
+          <mat-label>{{ 'sign-in-page.password' | translate }}</mat-label>
           <input matInput type="password" formControlName="password" (focus)="showPassStrength = true" 
           (blur)="showPassStrength = false" (input)="passwordInput($event)">
-          <mat-error *ngIf="form.get('password').hasError('required')">You should enter a value</mat-error>
-          <mat-error *ngIf="form.get('password').hasError('nomatchReg')">Not a valid Password</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('nomatchReg')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
         </mat-form-field>  
         
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Confirm password*</mat-label>
+          <mat-label>{{ 'sign-up-page.confirm-pass' | translate }}</mat-label>
           <input matInput type="password" formControlName="confirmpassword" (input)="confirmPasswordValidator()">
-          <mat-error *ngIf="form.get('confirmpassword').hasError('required')">You should enter a correct value of Password</mat-error>
-          <mat-error *ngIf="form.get('confirmpassword').hasError('nomatch')">Confirm password doesn't match with Password</mat-error>
+          <mat-error *ngIf="form.get('confirmpassword').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('confirmpassword').hasError('nomatch')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">SignUp</button>
-          <button mat-stroked-button type="button" routerLink='/sign-in'>Do you have an account?</button>
+          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ 'buttons.sign-up' | translate }}</button>
+          <button mat-stroked-button type="button" routerLink='/sign-in'>{{ 'sign-up-page.have-acc' | translate }}</button>
         </mat-card-actions>
         
       </div>

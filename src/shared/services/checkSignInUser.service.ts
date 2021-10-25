@@ -1,9 +1,12 @@
+import { Injectable } from "@angular/core";
 import { registeredUsers } from "../constants/registeredUsers";
 
+@Injectable({providedIn: 'root'})
 export class CheckSignInUser {
+
   public checkUser(email:string, password: string): boolean {
     const result: boolean = !!registeredUsers.find(user => (
-      user.newUserEmail === email && user.newUserPassword === password
+      user.userEmail === email && user.userPassword === password
     ))
 
     return result;

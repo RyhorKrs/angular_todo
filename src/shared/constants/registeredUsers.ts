@@ -1,22 +1,22 @@
-import { NewUser } from "../interfaces/NEWUSER"
+import { User } from "../interfaces/USER"
 
-export const registeredUsers: NewUser[] = [ 
+export const registeredUsers: User[] = [ 
   {
-    newUserFirstName: 'Ben',
-    newUserLastName: 'Smith',
-    newUserEmail: 'test1@mail.ru',
-    newUserPassword: 'Qwerty123*'
+    userFirstName: 'Ben',
+    userLastName: 'Smith',
+    userEmail: 'test1@mail.ru',
+    userPassword: 'Qwerty123*'
   },
   {
-    newUserFirstName: 'John',
-    newUserLastName: 'Smith',
-    newUserEmail: 'test2@gmail.com',
-    newUserPassword: 'Asdfgh123*'
+    userFirstName: 'John',
+    userLastName: 'Smith',
+    userEmail: 'test2@gmail.com',
+    userPassword: 'Asdfgh123*'
   },
   {
-    newUserFirstName: 'Alex',
-    newUserLastName: 'Smith',
-    newUserEmail: 'test3@yandex.ru',
-    newUserPassword: 'Zxcvbn123*'
+    userFirstName: 'Alex',
+    userLastName: 'Smith',
+    userEmail: 'test3@yandex.ru',
+    userPassword: 'Zxcvbn123*'
   }
 ]

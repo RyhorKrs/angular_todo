@@ -1,0 +1,59 @@
+{
+  "buttons": {
+    "sign-in": "SignIn",
+    "logout": "Logout",
+    "sign-up": "SignUp"
+  },
+  "header": {
+    "signed-in-as": "Signed in as {{user}}",
+    "blank-link": "DO SMTH",
+    "logout": "Logout"
+  },
+  "home-page": {
+    "title": "Get everything in order with AngularToDo",
+    "subtitle": "Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use).",
+    "start-now": "Start now"
+  },
+  "sign-in-page": {
+    "title": "SignIn on AngularToDo",
+    "email": "Email*",
+    "password": "Password*",
+    "error-required": "You should enter a value",
+    "error-novalid": "Not a valid value",
+    "error-novaliddata": "Not a valid Email or Password",
+    "create-new-acc": "Create new account"
+  },
+  "sign-up-page": {
+    "title": "SignUp on AngularToDo",
+    "fname-formfield": "First name*",
+    "fname-placeholder": "Ivan",
+    "lname-formfield": "Last name*",
+    "lname-placeholder": "Ivanov",
+    "confirm-pass": "Confirm password*",
+    "have-acc": "Do you have an account?"
+  },
+  "password-strength": {
+    "title": "Your password should contain at least:",
+    "upper-letter": "1 uppercase letter;",
+    "lower-letter": "1 lowercase letter;",
+    "numb": "1 number;",
+    "symbol": "1 special symbol;",
+    "length": "and be 8 symbols long or more;",
+    "weak": "Weak",
+    "moderate": "Moderate",
+    "strong": "Strong",
+    "very-strong": "Very strong",
+    "complete": "Complete"
+  },
+  "sign-up-redirect-page": {
+    "title": "You have successfully registered!!!" 
+  },
+  "tasks-page": {
+    "add-task": "Add task",
+    "title-formfield": "Title*",
+    "title-placeholder": "Title...",
+    "desc-formfield": "Description*",
+    "desc-placeholder": "Description...",
+    "del-task": "Delete task"
+  }
+}

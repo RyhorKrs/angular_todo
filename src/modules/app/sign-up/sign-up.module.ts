@@ -7,9 +7,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SignUpComponent } from './sign-up.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
+import { HeaderModule } from './../header/header.module';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -25,7 +33,17 @@ import { PasswordStrengthComponent } from './password-strength/password-strength
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HeaderModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en'
+    })
   ],
   providers: [],
   bootstrap: [SignUpComponent]
