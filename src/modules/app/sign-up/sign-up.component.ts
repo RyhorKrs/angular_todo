@@ -32,7 +32,10 @@ export class SignUpComponent implements OnInit{
         Validators.required,
         Validators.minLength(3),
       ]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required, 
+        Validators.pattern(REGS.EMAIL)
+      ]),
       password: new FormControl('', [
         Validators.required
       ]),
@@ -56,14 +59,6 @@ export class SignUpComponent implements OnInit{
     this.form.value.password !== this.form.value.confirmpassword
       ? this.form.controls.confirmpassword.setErrors({ nomatch: true })
       : this.form.controls.confirmpassword.setErrors(null);
-  }
-
-  public emailValidator(): void {
-    if(!!this.form.value.email.match(REGS.EMAIL)) {
-      this.form.controls.email.setErrors(null);
-    } else {
-      this.form.controls.email.setErrors({ nomatchReg: true });
-    }
   }
 
   public onSubmit(): void {

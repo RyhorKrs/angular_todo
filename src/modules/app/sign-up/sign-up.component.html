@@ -26,9 +26,9 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>{{ 'sign-in-page.email' | translate }}</mat-label>
-          <input matInput type="text" placeholder="pat@example.com" formControlName="email" (input)="emailValidator()">
+          <input matInput type="text" placeholder="pat@example.com" formControlName="email">
           <mat-error *ngIf="form.get('email').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
-          <mat-error *ngIf="form.get('email').hasError('nomatchReg')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('pattern')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
         </mat-form-field>  
 
         <mat-form-field class="example-full-width" appearance="fill">

@@ -9,7 +9,7 @@ export class SignInGuard implements CanActivate {
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router
-    ) {}
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

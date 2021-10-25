@@ -37,14 +37,18 @@ export class SignInComponent{
     }
   }
 
+  public rightDataUser():void {
+    this.localStorageService.setItem('currentUser', JSON.stringify(this.form.value.email));
+    this.showSignInError = false;
+    this.router.navigate(['/tasks']);
+    this.form.reset();
+  }
+
   public onSubmit(): void {
     if (this.form.valid) {
 
       if(this.checkUserService.checkUser(this.form.value.email, this.form.value.password)) {
-        this.localStorageService.setItem('currentUser', JSON.stringify(this.form.value.email));
-        this.showSignInError = false;
-        this.router.navigate(['/tasks']);
-        this.form.reset();
+        this.rightDataUser();
       } else {
         this.showSignInError = true;
         this.form.reset();
