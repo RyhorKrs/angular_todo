@@ -4,6 +4,7 @@
       <a routerLink='/'>
         <img class='logo' src='./../../../assets/images/angulartodo-logo.png' alt='appLogo'>
       </a>
+      <button class='lang-btn' mat-raised-button (click)="toggleLanguage()">{{language}}</button>
     </li>
     <li *ngIf='!isSignIn'><a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a></li>
     <li *ngIf='isSignIn' class='sign-in-li'>
