@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CheckSignInUser } from 'src/shared/services/checkSignInUser.service';
-import { LocalStorageService } from 'src/shared/services/localStorage.service';
+import { FbAuthService } from 'src/shared/services/fbAuth.service';
 import { REGS } from './../../../../src/shared/constants/regs';
 
 @Component({
@@ -10,13 +9,14 @@ import { REGS } from './../../../../src/shared/constants/regs';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent{
+export class SignInComponent implements OnInit{
   public form: FormGroup | any;
   public showSignInError: boolean = false;
 
+  public isSignedIn: boolean = false;
+
   constructor(private router: Router, 
-    private checkUserService: CheckSignInUser,
-    private localStorageService: LocalStorageService
+    public fbService: FbAuthService
   ) {}
 
   public ngOnInit(): void {
@@ -27,6 +27,8 @@ export class SignInComponent{
         Validators.minLength(8),
       ]),
     });
+
+    this.isSignedIn = localStorage.getItem('currentUser') !== null;
   }
 
   public emailValidator(): void {
@@ -37,22 +39,15 @@ export class SignInComponent{
     }
   }
 
-  public rightDataUser():void {
-    this.localStorageService.setItem('currentUser', JSON.stringify(this.form.value.email));
-    this.showSignInError = false;
-    this.router.navigate(['/tasks']);
-    this.form.reset();
-  }
-
-  public onSubmit(): void {
-    if (this.form.valid) {
-
-      if(this.checkUserService.checkUser(this.form.value.email, this.form.value.password)) {
-        this.rightDataUser();
-      } else {
-        this.showSignInError = true;
-        this.form.reset();
-      }
+  public async onSignIn():Promise<void> {
+    await this.fbService.signIn(this.form.value.email, this.form.value.password)
+    if(this.fbService.isSignedIn) {
+      this.showSignInError = false;
+      this.isSignedIn = true;
+      this.router.navigate(['/tasks']);
+    } else {
+      this.showSignInError = true;
+      this.form.reset();
     }
   }
 }

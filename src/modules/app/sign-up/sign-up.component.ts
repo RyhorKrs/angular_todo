@@ -3,8 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/constants/regs';
-import { User } from './../../../../src/shared/interfaces/USER';
-import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
+import { FbAuthService } from 'src/shared/services/fbAuth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,12 +13,13 @@ import { LocalStorageService } from './../../../../src/shared/services/localStor
 export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
+  public isSignedIn: boolean = false;
 
   public stream$ = new Subject<string>();
 
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService
+    public fbService: FbAuthService
   ) {}
 
   public ngOnInit(): void {
@@ -43,6 +43,8 @@ export class SignUpComponent implements OnInit{
         Validators.required
       ]),
     });
+
+    this.isSignedIn = localStorage.getItem('currentUser') !== null;
   }
 
   public passwordInput(event: any): void {
@@ -52,7 +54,7 @@ export class SignUpComponent implements OnInit{
       this.form.controls.password.setErrors({ nomatchReg: true });
     }
     
-    this.stream$.next(event.target.value)
+    this.stream$.next(event.target.value);
   }
 
   public confirmPasswordValidator(): void {
@@ -61,19 +63,10 @@ export class SignUpComponent implements OnInit{
       : this.form.controls.confirmpassword.setErrors(null);
   }
 
-  public onSubmit(): void {
-    if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
-      const newUser: User = {
-        userFirstName: this.form.value.firstname,
-        userLastName: this.form.value.lastname,
-        userEmail: this.form.value.email,
-        userPassword: this.form.value.password
-      };
-      
-      this.localStorageService.setItem('newUser', JSON.stringify(newUser));
-
+  public async onSignUp():Promise<void> {
+    await this.fbService.signUp(this.form.value.email, this.form.value.password)
+    if(this.fbService.isSignedUp) {
       this.form.reset();
-
       this.router.navigate(['/sign-up-redirect']);
     }
   }

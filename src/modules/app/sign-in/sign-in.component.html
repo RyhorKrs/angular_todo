@@ -22,7 +22,7 @@
         <mat-error *ngIf='showSignInError'>{{ 'errors.not-valid-data' | translate }}</mat-error>
         
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ 'buttons.sign-in' | translate }}</button>
+          <button mat-raised-button color="primary" type="submit" (click)="onSignIn()" [disabled]="form.invalid">{{ 'buttons.sign-in' | translate }}</button>
           <button mat-stroked-button type="button" routerLink='/sign-up'>{{ 'buttons.create-new-acc' | translate }}</button>
         </mat-card-actions>
         
