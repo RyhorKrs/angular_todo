@@ -2,28 +2,28 @@
 
 <div class='page_body'>
   <mat-card class='card'>
-    <mat-card-title class='title'>{{ 'sign-in-page.title' | translate }}</mat-card-title>
+    <mat-card-title class='title'>{{ 'titles.sign-in-page' | translate }}</mat-card-title>
     <mat-card-content>
       <div [formGroup]='form'>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>{{ 'sign-in-page.email' | translate }}</mat-label>
-          <input matInput type="text" placeholder="pat@example.com" formControlName="email" (input)="emailValidator()">
-          <mat-error *ngIf="form.get('email').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
-          <mat-error *ngIf="form.get('email').hasError('nomatchReg')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
+          <mat-label>{{ 'form-field-label.email' | translate }}</mat-label>
+          <input matInput type="text" placeholder="{{ 'placeholders.email' | translate }}" formControlName="email" (input)="emailValidator()">
+          <mat-error *ngIf="form.get('email').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('nomatchReg')">{{ 'errors.not-valid' | translate }}</mat-error>
         </mat-form-field>
         
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>{{ 'sign-in-page.password' | translate }}</mat-label>
+          <mat-label>{{ 'form-field-label.password' | translate }}</mat-label>
           <input matInput type="password" formControlName="password">
-          <mat-error *ngIf="form.get('password').hasError('required')">{{ 'sign-in-page.error-required' | translate }}</mat-error>
-          <mat-error *ngIf="form.get('password').hasError('minlength')">{{ 'sign-in-page.error-novalid' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('minlength')">{{ 'errors.not-valid' | translate }}</mat-error>
         </mat-form-field>
 
-        <mat-error *ngIf='showSignInError'>{{ 'sign-in-page.title' | translate }}</mat-error>
+        <mat-error *ngIf='showSignInError'>{{ 'errors.not-valid-data' | translate }}</mat-error>
         
         <mat-card-actions>
           <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ 'buttons.sign-in' | translate }}</button>
-          <button mat-stroked-button type="button" routerLink='/sign-up'>{{ 'sign-in-page.create-new-acc' | translate }}</button>
+          <button mat-stroked-button type="button" routerLink='/sign-up'>{{ 'buttons.create-new-acc' | translate }}</button>
         </mat-card-actions>
         
       </div>
