@@ -12,7 +12,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SignInComponent } from './sign-in.component';
-import { HeaderModule } from './../header/header.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule, 
     MatButtonModule, 
     BrowserAnimationsModule,
-    HeaderModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

@@ -15,13 +15,13 @@ export class SignInGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): Observable<boolean> | Promise<boolean> | boolean {
-      if(this.localStorageService.getItem('currentUser')) {
+      if(this.localStorageService.getItem('uid')) {
 
         return true;
       } else {
         this.router.navigate(['/sign-in']);
 
         return false;
-      }
+      } 
     }
 }

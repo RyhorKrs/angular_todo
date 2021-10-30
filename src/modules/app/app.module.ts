@@ -13,7 +13,6 @@ import { HomeModule } from './home/home.module';
 import { TasksModule } from './tasks/tasks.module';
 import { SignInModule } from './sign-in/sign-in.module';
 import { SignUpModule } from './sign-up/sign-up.module';
-import { SignUpRedirectModule } from './sign-up-redirect/sign-up-redirect.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TasksModule,
     SignInModule,
     SignUpModule,
-    SignUpRedirectModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

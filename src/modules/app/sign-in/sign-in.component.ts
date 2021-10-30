@@ -11,43 +11,42 @@ import { REGS } from './../../../../src/shared/constants/regs';
 })
 export class SignInComponent implements OnInit{
   public form: FormGroup | any;
-  public showSignInError: boolean = false;
+  public error: string = '';
+  public showLoader: boolean = false;
 
-  public isSignedIn: boolean = false;
-
-  constructor(private router: Router, 
+  constructor(
+    private router: Router, 
     public fbService: FbAuthService
   ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(REGS.EMAIL)
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
     });
-
-    this.isSignedIn = localStorage.getItem('currentUser') !== null;
   }
 
-  public emailValidator(): void {
-    if(!!this.form.value.email.match(REGS.EMAIL)) {
-      this.form.controls.email.setErrors(null);
-    } else {
-      this.form.controls.email.setErrors({ nomatchReg: true });
-    }
-  }
-
-  public async onSignIn():Promise<void> {
-    await this.fbService.signIn(this.form.value.email, this.form.value.password)
-    if(this.fbService.isSignedIn) {
-      this.showSignInError = false;
-      this.isSignedIn = true;
+  public onSignIn() {
+    this.showLoader = true;
+    this.fbService.signIn(this.form.value.email, this.form.value.password)
+    .then(res => {
+      this.fbService.changeIsSignedIn(true);
+      this.error = '';
+      localStorage.setItem('uid', JSON.stringify(res.user?.uid))
+      this.showLoader = false;
       this.router.navigate(['/tasks']);
-    } else {
-      this.showSignInError = true;
+    })
+    .catch(err => {
+      this.fbService.changeIsSignedIn(false);
+      this.error = err.message;
+      this.showLoader = false;
       this.form.reset();
-    }
+    })
   }
 }

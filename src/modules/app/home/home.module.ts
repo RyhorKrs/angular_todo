@@ -7,7 +7,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { HomeComponent } from './home.component';
-import { HeaderModule } from '../header/header.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,7 +21,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule, 
     AppRoutingModule,
     MatButtonModule,
-    HeaderModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

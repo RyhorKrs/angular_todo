@@ -14,7 +14,7 @@
           <ul>
             <li class='user-email-li'>{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</li>
             <hr>
-            <li><a mat-button href='#'>{{ 'buttons.blank-link' | translate }}</a></li>
+            <li><a mat-button routerLink='/tasks'>My tasks</a></li>
             <li><a mat-button href='#'>{{ 'buttons.blank-link' | translate }}</a></li>
             <hr>
             <li><button mat-button color='warn' (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button></li>

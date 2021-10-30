@@ -9,8 +9,8 @@ import { FbAuthService } from 'src/shared/services/fbAuth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent{
-  public isSignIn: boolean = this.localStorageService.getItem('currentUser') ? true : false;
+export class HeaderComponent implements OnInit {
+  public isSignIn: boolean = false;
   public showUserMenu: boolean = false;
   public language: string = 'en';
 
@@ -23,9 +23,18 @@ export class HeaderComponent{
     public fbService: FbAuthService
   ) {}
 
+  public ngOnInit(): void {
+    this.fbService.stream$.subscribe((value: boolean) => {
+      this.isSignIn = value;
+    })
+
+    this.isSignIn = this.localStorageService.getItem('uid') ? true : false;
+  }
+
   public logoutUser():void {
     this.fbService.logout();
 
+    this.showUserMenu = false;
     this.router.navigate(['/sign-in']);
   }
 
