@@ -8,6 +8,7 @@ import { Task } from './../../../shared/interfaces/TASK';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit, OnDestroy {
+  public error: string = '';
   public tasks: Task[] = [
     {
       taskTitle: 'First task', 
@@ -44,10 +45,10 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.user = realUser;
       },
       err => {
-        console.warn('GetDataErr[1]: ', err.message);
+        this.error = err.message;
       })
     }, err => {
-      console.warn('GetDataErr[2]: ', err.message);
+      this.error = err.message;
     })
   }
 

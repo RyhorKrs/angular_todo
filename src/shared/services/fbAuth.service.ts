@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { HttpClient } from "@angular/common/http";
-import { User } from "../interfaces/USER";
+import { HttpClient } from '@angular/common/http';
+import { User } from '../interfaces/USER';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 interface UserResponse {
-  name: string
+  name: string;
 }
 
 @Injectable({providedIn: 'root'})
 export class FbAuthService {
   public isSignedIn: boolean = false;
-  public uid: any = '';
-  public id: any = '';
+  public uid: string = '';
+  public id: string = '';
 
   public stream$ = new Subject<boolean>();
 
