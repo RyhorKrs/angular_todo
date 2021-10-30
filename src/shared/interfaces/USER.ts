@@ -3,5 +3,7 @@ export interface User {
   userLastName: string,
   userEmail: string,
   userPassword: string,
+  userUID?: string,
+  id?: string
 }
     

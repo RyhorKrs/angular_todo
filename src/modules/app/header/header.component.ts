@@ -1,29 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
+import { TranslateService } from '@ngx-translate/core';
+import { FbAuthService } from 'src/shared/services/fbAuth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  public isSignIn: boolean = this.localStorageService.getItem('currentUser') ? true : false;
+export class HeaderComponent implements OnInit {
+  public isSignIn: boolean = false;
   public showUserMenu: boolean = false;
+  public language: string = 'en';
 
-  public currentUser: string | null = this.localStorageService.getItem('currentUser');
+  public currentUser: string | null = '123';
 
   constructor(
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService,
+    public fbService: FbAuthService
   ) {}
 
+  public ngOnInit(): void {
+    this.fbService.stream$.subscribe((value: boolean) => {
+      this.isSignIn = value;
+    })
+
+    this.isSignIn = this.localStorageService.getItem('uid') ? true : false;
+  }
+
   public logoutUser():void {
-    this.localStorageService.removeItem('currentUser');
+    this.fbService.logout();
+
+    this.showUserMenu = false;
     this.router.navigate(['/sign-in']);
   }
 
   public toggleUserMenu():void {
     this.showUserMenu = !this.showUserMenu;
+  }
+
+  public toggleLanguage(): void {
+    this.language = this.language === 'en' ? 'ru' : 'en';
+    
+    this.translate.use(this.language);
   }
 }

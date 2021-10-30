@@ -31,7 +31,8 @@
     "create-new-acc": "Create new account",
     "have-acc": "Do you have an account?",
     "add-task": "Add task",
-    "delete-task": "Delete task"
+    "delete-task": "Delete task",
+    "my-tasks": "My tasks"
   },
   "errors": {
     "required": "You should enter a value",

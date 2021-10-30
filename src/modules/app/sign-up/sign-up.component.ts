@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { REGS } from './../../../../src/shared/constants/regs';
-import { User } from './../../../../src/shared/interfaces/USER';
-import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
+import { FbAuthService } from 'src/shared/services/fbAuth.service';
+import { User } from 'src/shared/interfaces/USER';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,12 +14,14 @@ import { LocalStorageService } from './../../../../src/shared/services/localStor
 export class SignUpComponent implements OnInit{
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
+  public error: string = '';
+  public showLoader: boolean = false;
 
   public stream$ = new Subject<string>();
 
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService
+    public fbService: FbAuthService
   ) {}
 
   public ngOnInit(): void {
@@ -52,7 +54,7 @@ export class SignUpComponent implements OnInit{
       this.form.controls.password.setErrors({ nomatchReg: true });
     }
     
-    this.stream$.next(event.target.value)
+    this.stream$.next(event.target.value);
   }
 
   public confirmPasswordValidator(): void {
@@ -61,20 +63,48 @@ export class SignUpComponent implements OnInit{
       : this.form.controls.confirmpassword.setErrors(null);
   }
 
-  public onSubmit(): void {
-    if(this.form.valid && this.form.value.confirmpassword === this.form.value.password) {
-      const newUser: User = {
-        userFirstName: this.form.value.firstname,
-        userLastName: this.form.value.lastname,
-        userEmail: this.form.value.email,
-        userPassword: this.form.value.password
-      };
-      
-      this.localStorageService.setItem('newUser', JSON.stringify(newUser));
+  public onSignUp(): void {
+    this.showLoader = true;
 
-      this.form.reset();
+    const user: User = {
+      userEmail: this.form.value.email,
+      userFirstName: this.form.value.firstname,
+      userLastName: this.form.value.lastname,
+      userPassword: this.form.value.password
+    };
 
-      this.router.navigate(['/sign-up-redirect']);
-    }
+    this.fbService.signUp(user)
+    .then(res => {
+      user.userUID = res.user?.uid;
+      this.error = '';
+
+      this.fbService.postDataInDb(user).subscribe(user => {
+        this.showLoader = false;
+        this.error = '';
+
+        this.fbService.signIn(user.userEmail, user.userPassword)
+        .then(res => {
+          this.fbService.changeIsSignedIn(true);
+          this.error = '';
+          localStorage.setItem('uid', JSON.stringify(res.user?.uid));
+          this.showLoader = false;
+          this.form.reset();
+          this.router.navigate(['/tasks']);
+        })
+        .catch(err => {
+          this.fbService.changeIsSignedIn(false);
+          this.error = err.message;
+          this.showLoader = false;
+          this.form.reset();
+        })
+      }, err => {
+        this.error = err.message;
+        this.showLoader = false;
+      })
+    })
+    .catch(err => {
+      this.error = err.message;
+      this.showLoader = false;
+    })
   }
 }

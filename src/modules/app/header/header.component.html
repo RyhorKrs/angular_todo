@@ -4,6 +4,7 @@
       <a routerLink='/'>
         <img class='logo' src='./../../../assets/images/angulartodo-logo.png' alt='appLogo'>
       </a>
+      <button class='lang-btn' mat-raised-button (click)="toggleLanguage()">{{language}}</button>
     </li>
     <li *ngIf='!isSignIn'><a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a></li>
     <li *ngIf='isSignIn' class='sign-in-li'>
@@ -13,7 +14,7 @@
           <ul>
             <li class='user-email-li'>{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</li>
             <hr>
-            <li><a mat-button href='#'>{{ 'buttons.blank-link' | translate }}</a></li>
+            <li><a mat-button routerLink='/tasks'>{{ 'buttons.my-tasks' | translate }}</a></li>
             <li><a mat-button href='#'>{{ 'buttons.blank-link' | translate }}</a></li>
             <hr>
             <li><button mat-button color='warn' (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button></li>

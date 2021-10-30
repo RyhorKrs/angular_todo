@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CheckSignInUser } from 'src/shared/services/checkSignInUser.service';
-import { LocalStorageService } from 'src/shared/services/localStorage.service';
+import { FbAuthService } from 'src/shared/services/fbAuth.service';
 import { REGS } from './../../../../src/shared/constants/regs';
 
 @Component({
@@ -10,18 +9,22 @@ import { REGS } from './../../../../src/shared/constants/regs';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent{
+export class SignInComponent implements OnInit{
   public form: FormGroup | any;
-  public showSignInError: boolean = false;
+  public error: string = '';
+  public showLoader: boolean = false;
 
-  constructor(private router: Router, 
-    private checkUserService: CheckSignInUser,
-    private localStorageService: LocalStorageService
+  constructor(
+    private router: Router, 
+    public fbService: FbAuthService
   ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(REGS.EMAIL)
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -29,30 +32,21 @@ export class SignInComponent{
     });
   }
 
-  public emailValidator(): void {
-    if(!!this.form.value.email.match(REGS.EMAIL)) {
-      this.form.controls.email.setErrors(null);
-    } else {
-      this.form.controls.email.setErrors({ nomatchReg: true });
-    }
-  }
-
-  public rightDataUser():void {
-    this.localStorageService.setItem('currentUser', JSON.stringify(this.form.value.email));
-    this.showSignInError = false;
-    this.router.navigate(['/tasks']);
-    this.form.reset();
-  }
-
-  public onSubmit(): void {
-    if (this.form.valid) {
-
-      if(this.checkUserService.checkUser(this.form.value.email, this.form.value.password)) {
-        this.rightDataUser();
-      } else {
-        this.showSignInError = true;
-        this.form.reset();
-      }
-    }
+  public onSignIn() {
+    this.showLoader = true;
+    this.fbService.signIn(this.form.value.email, this.form.value.password)
+    .then(res => {
+      this.fbService.changeIsSignedIn(true);
+      this.error = '';
+      localStorage.setItem('uid', JSON.stringify(res.user?.uid))
+      this.showLoader = false;
+      this.router.navigate(['/tasks']);
+    })
+    .catch(err => {
+      this.fbService.changeIsSignedIn(false);
+      this.error = err.message;
+      this.showLoader = false;
+      this.form.reset();
+    })
   }
 }

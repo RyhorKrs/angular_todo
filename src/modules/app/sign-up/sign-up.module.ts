@@ -13,7 +13,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SignUpComponent } from './sign-up.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
-import { HeaderModule } from './../header/header.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,7 +21,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    [SignUpComponent, PasswordStrengthComponent]
+    SignUpComponent, 
+    PasswordStrengthComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule, 
     MatButtonModule, 
     BrowserAnimationsModule,
-    HeaderModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

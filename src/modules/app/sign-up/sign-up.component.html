@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <div class='page_body'>
   <mat-card class='card'>
     <mat-card-title class='title'>{{ 'titles.sign-up-page' | translate }}</mat-card-title>
@@ -46,12 +44,18 @@
           <mat-error *ngIf="form.get('confirmpassword').hasError('nomatch')">{{ 'errors.not-valid' | translate }}</mat-error>
         </mat-form-field>
 
+        <mat-error>{{ error }}</mat-error>
+
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ 'buttons.sign-up' | translate }}</button>
+          <button mat-raised-button color="primary" type="submit" (click)="onSignUp()" [disabled]="form.invalid">{{ 'buttons.sign-up' | translate }}</button>
           <button mat-stroked-button type="button" routerLink='/sign-in'>{{ 'buttons.have-acc' | translate }}</button>
         </mat-card-actions>
         
       </div>
     </mat-card-content>
   </mat-card>
+</div>
+
+<div class="loader" *ngIf='showLoader'>
+  <img src="./../../../assets/images/loader1.gif" alt="loader">
 </div>

@@ -4,15 +4,13 @@ import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignUpRedirectComponent } from './sign-up-redirect/sign-up-redirect.component';
 import { SignInGuard } from './../../../src/shared/guards/sign-in.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'tasks', component: TasksComponent, canActivate: [SignInGuard] },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'sign-up-redirect', component: SignUpRedirectComponent },
+  { path: 'sign-up', component: SignUpComponent }
 ];
 
 @NgModule({
