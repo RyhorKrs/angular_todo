@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FbAuthService } from 'src/shared/services/fbAuth.service';
 import { Task } from './../../../shared/interfaces/TASK';
 
@@ -7,7 +7,7 @@ import { Task } from './../../../shared/interfaces/TASK';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })
-export class TasksComponent implements OnInit, OnDestroy {
+export class TasksComponent implements OnInit {
   public error: string = '';
   public tasks: Task[] = [
     {
@@ -26,27 +26,14 @@ export class TasksComponent implements OnInit, OnDestroy {
   constructor (private fbService: FbAuthService) {}
 
   public ngOnInit() {
-    this.fbService.uid = JSON.parse(localStorage.uid);
     this.getUserContent();
-  }
-
-  public ngOnDestroy() {
-    this.fbService.uid = '';
-    this.fbService.id = '';
   }
 
   public user: any = {}
 
   public getUserContent(): void {
-    this.fbService.getDataFromDb().subscribe(user => {
-      let keys: string[] = Object.keys(user);
-      this.fbService.id = keys[0];
-      this.fbService.getDataFromDb().subscribe(realUser => {
-        this.user = realUser;
-      },
-      err => {
-        this.error = err.message;
-      })
+    this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(user => {
+      this.user = user[Object.keys(user)[0]];
     }, err => {
       this.error = err.message;
     })

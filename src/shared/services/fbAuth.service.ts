@@ -12,8 +12,6 @@ interface UserResponse {
 @Injectable({providedIn: 'root'})
 export class FbAuthService {
   public isSignedIn: boolean = false;
-  public uid: string = '';
-  public id: string = '';
 
   public stream$ = new Subject<boolean>();
 
@@ -39,9 +37,9 @@ export class FbAuthService {
     return this.fbAuth.signInWithEmailAndPassword(email, password);
   }
 
-  public getDataFromDb(): Observable<any> {
+  public getDataFromDb(uid: string): Observable<any> {
     return this.http
-      .get(`https://angular-todo-7e025-default-rtdb.firebaseio.com/users/${this.uid}/${this.id}.json`)
+      .get(`https://angular-todo-7e025-default-rtdb.firebaseio.com/users/${uid}.json`)
       .pipe(map(res => {
         return res;
       }));
@@ -52,9 +50,6 @@ export class FbAuthService {
     localStorage.removeItem('uid');
     this.isSignedIn = false;
     this.stream$.next(this.isSignedIn);
-
-    this.uid = '';
-    this.id = '';
   }
 
   public changeIsSignedIn(bool:boolean):void {
