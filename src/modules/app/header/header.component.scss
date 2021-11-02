@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: rgb(110, 110, 255);
+  background-color: rgb(63, 81, 181);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 
@@ -33,6 +33,7 @@
       position: relative;
 
       .user-menu-body {
+        z-index: 5;
         position: absolute;
         top: 45px;
         left: -90px;

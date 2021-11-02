@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FbAuthService } from 'src/shared/services/fbAuth.service';
+import { FbTasksService } from 'src/shared/services/fbTasks.service';
 import { Task } from './../../../shared/interfaces/TASK';
 
 @Component({
@@ -9,27 +10,17 @@ import { Task } from './../../../shared/interfaces/TASK';
 })
 export class TasksComponent implements OnInit {
   public error: string = '';
-  public tasks: Task[] = [
-    {
-      taskTitle: 'First task', 
-      taskDescription: 'asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
-    },
-    {
-      taskTitle: 'Second task', 
-      taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
-    },
-    {
-      taskTitle: 'Third task', taskDescription: 'asdasasd asdasasd awdasd asdas ad fsd da dad adassd asd dw da'
-    }
-  ];
+  public user: any = {};
+  public tasks: Task[] = [];
 
-  constructor (private fbService: FbAuthService) {}
+  constructor (
+    private fbService: FbAuthService, 
+    private fbTasksService: FbTasksService
+    ) {}
 
   public ngOnInit() {
     this.getUserContent();
   }
-
-  public user: any = {}
 
   public getUserContent(): void {
     this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(user => {
@@ -37,13 +28,31 @@ export class TasksComponent implements OnInit {
     }, err => {
       this.error = err.message;
     })
+
+    this.fbTasksService.getTasksFromDb(JSON.parse(localStorage.uid)).subscribe(tasks => {
+      for (let key in tasks) {
+        let task = tasks[key];
+        task.id = key;
+        this.tasks.push(task);
+      }
+    }, err => {
+      this.error = err.message;
+    })
   }
 
-  public updateTasks(task: Task): void {
-    this.tasks.push(task);
+  public addTask(task: Task): void {
+    this.fbTasksService.createTaskInDb(task, JSON.parse(localStorage.uid)).subscribe(task => {
+      this.tasks.push(task);
+    }, err => {
+      this.error = err.message;
+    })
   }
 
-  public removeTask(title: string): void {
-    this.tasks = this.tasks.filter(task => task.taskTitle !== title)
+  public deleteTask(task: Task): void {
+    this.fbTasksService.deleteTaskInDb(task, JSON.parse(localStorage.uid)).subscribe(() => {
+      this.tasks = this.tasks.filter(t => t.id !== task.id);
+    }, err => {
+      this.error = err.message;
+    })
   }
 }
