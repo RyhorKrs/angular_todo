@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/USER';
+import { Response } from '../interfaces/RESPONSE';
+import { fbUrl } from '../constants/fb';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-interface UserResponse {
-  name: string;
-}
 
 @Injectable({providedIn: 'root'})
 export class FbAuthService {
   public isSignedIn: boolean = false;
-  public uid: string = '';
-  public id: string = '';
 
   public stream$ = new Subject<boolean>();
 
@@ -29,7 +25,7 @@ export class FbAuthService {
 
   public postDataInDb(user: User): Observable<User> {
     return this.http
-      .post<UserResponse>(`https://angular-todo-7e025-default-rtdb.firebaseio.com/users/${user?.userUID}.json`, user )
+      .post<Response>(`${fbUrl}/users/${user?.userUID}.json`, user )
       .pipe(map(res => {
         return {...user, id: res.name};
       }));
@@ -39,12 +35,10 @@ export class FbAuthService {
     return this.fbAuth.signInWithEmailAndPassword(email, password);
   }
 
-  public getDataFromDb(): Observable<any> {
+  public getDataFromDb(uid: string): Observable<any> {
     return this.http
-      .get(`https://angular-todo-7e025-default-rtdb.firebaseio.com/users/${this.uid}/${this.id}.json`)
-      .pipe(map(res => {
-        return res;
-      }));
+      .get(`${fbUrl}/users/${uid}.json`)
+      .pipe(map(res => res));
   }
 
   public logout(): void {
@@ -52,13 +46,10 @@ export class FbAuthService {
     localStorage.removeItem('uid');
     this.isSignedIn = false;
     this.stream$.next(this.isSignedIn);
-
-    this.uid = '';
-    this.id = '';
   }
 
   public changeIsSignedIn(bool:boolean):void {
-    this.isSignedIn = bool ? true : false;
+    this.isSignedIn = bool;
     this.stream$.next(this.isSignedIn);
   }
 }

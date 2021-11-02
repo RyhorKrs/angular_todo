@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from '../services/localStorage.service';
 
 @Injectable({providedIn: 'root'})
-export class SignInGuard implements CanActivate {
+export class TasksGuard implements CanActivate {
 
   constructor(
     private localStorageService: LocalStorageService,

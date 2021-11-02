@@ -8,10 +8,10 @@ import { Task } from './../../../../shared/interfaces/TASK';
 })
 export class TaskItemComponent {
   @Input() task: Task | any;
-  @Output() onDel: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onDel: EventEmitter<Task> = new EventEmitter<Task>();
 
 
-  public delTask() {
-    this.onDel.emit(this.task.taskTitle)
+  public delTask(): void {
+    this.onDel.emit(this.task);
   }
 }

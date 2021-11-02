@@ -13,10 +13,9 @@ export class HeaderComponent implements OnInit {
   public isSignIn: boolean = false;
   public showUserMenu: boolean = false;
   public language: string = 'en';
+  public currentUser: string = 'xxx';
 
-  public currentUser: string | null = '123';
-
-  constructor(
+  constructor (
     private localStorageService: LocalStorageService,
     private router: Router,
     public translate: TranslateService,
@@ -28,7 +27,7 @@ export class HeaderComponent implements OnInit {
       this.isSignIn = value;
     })
 
-    this.isSignIn = this.localStorageService.getItem('uid') ? true : false;
+    this.isSignIn = !!this.localStorageService.getItem('uid');
   }
 
   public logoutUser():void {

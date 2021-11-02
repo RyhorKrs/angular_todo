@@ -1,9 +1,18 @@
 <div class='page_body'>
-  <div>
-    {{user.userFirstName}} {{user.userLastName}}
-    {{ error }}
-    <app-add-task-form (onAdd)="updateTasks($event)"></app-add-task-form>
-    <hr>
-    <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="removeTask($event)"></app-task-item>
-  </div>
+  {{ error }}
+  <app-add-task-form (onAdd)="addTask($event)"></app-add-task-form>
+  <hr>
+  <mat-tab-group>
+    <mat-tab label="{{ 'buttons.all' | translate }}"> 
+      <div *ngIf="tasks.length">
+        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="deleteTask($event)"></app-task-item>
+      </div>
+      <div *ngIf="!tasks.length">
+        <p>{{ 'buttons.no-tasks' | translate }}</p>
+      </div> 
+    </mat-tab>
+    <mat-tab label="{{ 'buttons.new' | translate }}"> XXX </mat-tab>
+    <mat-tab label="{{ 'buttons.in-process' | translate }}"> XXX </mat-tab>
+    <mat-tab label="{{ 'buttons.done' | translate }}"> XXX </mat-tab>
+  </mat-tab-group>
 </div>
