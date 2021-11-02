@@ -38,9 +38,7 @@ export class FbAuthService {
   public getDataFromDb(uid: string): Observable<any> {
     return this.http
       .get(`${fbUrl}/users/${uid}.json`)
-      .pipe(map(res => {
-        return res;
-      }));
+      .pipe(map(res => res));
   }
 
   public logout(): void {

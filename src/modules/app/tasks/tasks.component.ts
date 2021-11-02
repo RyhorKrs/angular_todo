@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FbAuthService } from 'src/shared/services/fbAuth.service';
 import { FbTasksService } from 'src/shared/services/fbTasks.service';
 import { Task } from './../../../shared/interfaces/TASK';
+import { User } from 'src/shared/interfaces/USER';
 
 @Component({
   selector: 'app-tasks',
@@ -16,9 +17,9 @@ export class TasksComponent implements OnInit {
   constructor (
     private fbService: FbAuthService, 
     private fbTasksService: FbTasksService
-    ) {}
+  ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.getUserContent();
   }
 

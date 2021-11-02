@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   public language: string = 'en';
   public currentUser: string = 'xxx';
 
-  constructor(
+  constructor (
     private localStorageService: LocalStorageService,
     private router: Router,
     public translate: TranslateService,

@@ -5,5 +5,5 @@ export interface User {
   userPassword: string,
   userUID?: string,
   id?: string
-}
+};
     
