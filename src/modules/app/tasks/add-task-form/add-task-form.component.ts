@@ -16,13 +16,18 @@ export class AddTaskFormComponent implements OnInit{
     this.addTaskForm = new FormGroup({
       taskTitle: new FormControl('', [Validators.required]),
       taskDescription: new FormControl('', [Validators.required]),
+      taskImportant: new FormControl(false),
+      taskDate: new FormControl('', [Validators.required]),
     });
   }
 
   public addTask(): void {
     const task: Task = {
       taskTitle: this.addTaskForm.value.taskTitle,
-      taskDescription: this.addTaskForm.value.taskDescription
+      taskDescription: this.addTaskForm.value.taskDescription,
+      taskImportant: !!this.addTaskForm.value.taskImportant,
+      taskDate: this.addTaskForm.value.taskDate.toLocaleDateString(),
+      taskCategory: 'new'
     };
 
     this.onAdd.emit(task);

@@ -3,16 +3,89 @@
   <app-add-task-form (onAdd)="addTask($event)"></app-add-task-form>
   <hr>
   <mat-tab-group>
-    <mat-tab label="{{ 'buttons.all' | translate }}"> 
+    <mat-tab label="{{ 'buttons.all' | translate }} ({{tasks.length}})"> 
       <div *ngIf="tasks.length">
-        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="deleteTask($event)"></app-task-item>
+        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
       </div>
       <div *ngIf="!tasks.length">
-        <p>{{ 'buttons.no-tasks' | translate }}</p>
+        <p>{{ 'messages.no-tasks' | translate }}</p>
       </div> 
     </mat-tab>
-    <mat-tab label="{{ 'buttons.new' | translate }}"> XXX </mat-tab>
-    <mat-tab label="{{ 'buttons.in-process' | translate }}"> XXX </mat-tab>
-    <mat-tab label="{{ 'buttons.done' | translate }}"> XXX </mat-tab>
+    <mat-tab label="{{ 'buttons.new' | translate }} ({{newTasks.length}})">
+      <div *ngIf="newTasks.length">
+        <app-task-item *ngFor="let t of newTasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
+      </div>
+      <div *ngIf="!newTasks.length">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'buttons.in-process' | translate }} ({{inProcessTasks.length}})">
+      <div *ngIf="inProcessTasks.length">
+        <app-task-item *ngFor="let t of inProcessTasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
+      </div>
+      <div *ngIf="!inProcessTasks.length">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'buttons.done' | translate }} ({{doneTasks.length}})">
+      <div *ngIf="doneTasks.length">
+        <app-task-item *ngFor="let t of doneTasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
+      </div>
+      <div *ngIf="!doneTasks.length">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
   </mat-tab-group>
+</div>
+
+<div class="del-task-modal task-modal" *ngIf="showDelTaskModal">
+  <mat-card>
+    <mat-card-title>{{ 'content.del-modal-title' | translate }} <small>({{currentDelTask.taskTitle}})</small>?</mat-card-title>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="deleteTask()">{{ 'buttons.yes' | translate }}</button>
+      <button mat-stroked-button type="button" (click)="hideDelModal()">{{ 'buttons.no' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="edit-task-modal task-modal" *ngIf="showEditTaskModal">
+  <mat-card>
+    <mat-card-title>{{ 'content.edit-modal-title' | translate }}</mat-card-title>
+    <div class="edit-task-form" [formGroup]='editTaskForm'>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{ 'form-field-label.title' | translate }}</mat-label>
+        <input matInput type="text" placeholder="{{ 'placeholders.title' | translate }}" formControlName="taskTitle">
+        <mat-error *ngIf="editTaskForm.get('taskTitle').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+      </mat-form-field>
+            
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{ 'form-field-label.description' | translate }}</mat-label>
+        <input matInput type="text"  placeholder="{{ 'placeholders.description' | translate }}" formControlName="taskDescription">
+        <mat-error *ngIf="editTaskForm.get('taskDescription').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width datepicker" appearance="fill">
+        <mat-label>{{ 'form-field-label.chose-deadline' | translate }}</mat-label>
+        <input autocomplete="none" matInput [matDatepicker]="picker" formControlName="taskDate">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="editTaskForm.get('taskDate').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-radio-group color="primary" aria-label="Select an category" formControlName="taskCategory">
+        <mat-radio-button value="new">{{ 'buttons.new' | translate }}</mat-radio-button>
+        <mat-radio-button value="in-process">{{ 'buttons.in-process' | translate }}</mat-radio-button>
+        <mat-radio-button value="done">{{ 'buttons.done' | translate }}</mat-radio-button>
+      </mat-radio-group>
+    
+      <mat-checkbox color="primary" formControlName="taskImportant">{{ 'form-field-label.important-task' | translate }}</mat-checkbox>
+
+    </div>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="editTask()" [disabled]="editTaskForm.invalid">{{ 'buttons.edit-task' | translate }}</button>
+      <button mat-stroked-button type="button" (click)="hideEditModal()">{{ 'buttons.cancel' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

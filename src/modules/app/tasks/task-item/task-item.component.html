@@ -2,8 +2,11 @@
   <mat-card-title class='title'>{{task.taskTitle}}</mat-card-title>
     <mat-card-content>
       {{task.taskDescription}}
+      <p><b *ngIf="task.taskImportant">{{ 'form-field-label.important-task' | translate }}</b></p>
+      <p>{{ 'messages.deadline-date' | translate }} {{task.taskDate}}</p>
       <mat-card-actions>
         <button mat-raised-button color="warn" (click)="delTask()">{{ 'buttons.delete-task' | translate }}</button>
+        <button mat-raised-button (click)="editTask()">{{ 'buttons.edit-task' | translate }}</button>
       </mat-card-actions>       
   </mat-card-content>
 </mat-card>

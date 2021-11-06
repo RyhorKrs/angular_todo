@@ -9,9 +9,13 @@ import { Task } from './../../../../shared/interfaces/TASK';
 export class TaskItemComponent {
   @Input() task: Task | any;
   @Output() onDel: EventEmitter<Task> = new EventEmitter<Task>();
-
+  @Output() onEdit: EventEmitter<Task> = new EventEmitter<Task>();
 
   public delTask(): void {
     this.onDel.emit(this.task);
+  }
+
+  public editTask(): void {
+    this.onEdit.emit(this.task);
   }
 }
