@@ -21,7 +21,7 @@
     </mat-tab>
     <mat-tab label="{{ 'buttons.in-process' | translate }} ({{inProcessTasks.length}})">
       <div *ngIf="inProcessTasks.length">
-        <app-task-item *ngFor="let t of inProcessTasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
+        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="preDelTask($event)" (onEdit)="preEditTask($event)"></app-task-item>
       </div>
       <div *ngIf="!inProcessTasks.length">
         <p>{{ 'messages.no-tasks' | translate }}</p>
@@ -39,8 +39,8 @@
 </div>
 
 <div class="del-task-modal task-modal" *ngIf="showDelTaskModal">
-  <mat-card>
-    <mat-card-title>{{ 'content.del-modal-title' | translate }} <small>({{currentDelTask.taskTitle}})</small>?</mat-card-title>
+  <mat-card class="modal-body">
+    <mat-card-title class="modal-title">{{ 'content.del-modal-title' | translate }} <small>({{currentDelTask.taskTitle}})</small>?</mat-card-title>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="deleteTask()">{{ 'buttons.yes' | translate }}</button>
       <button mat-stroked-button type="button" (click)="hideDelModal()">{{ 'buttons.no' | translate }}</button>
@@ -49,8 +49,8 @@
 </div>
 
 <div class="edit-task-modal task-modal" *ngIf="showEditTaskModal">
-  <mat-card>
-    <mat-card-title>{{ 'content.edit-modal-title' | translate }}</mat-card-title>
+  <mat-card class="modal-body">
+    <mat-card-title class="modal-title">{{ 'content.edit-modal-title' | translate }}</mat-card-title>
     <div class="edit-task-form" [formGroup]='editTaskForm'>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>{{ 'form-field-label.title' | translate }}</mat-label>

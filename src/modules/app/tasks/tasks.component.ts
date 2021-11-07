@@ -11,7 +11,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class TasksComponent implements OnInit {
   public error: string = '';
-  public user: any = {};
   public tasks: Task[] = [];
   public newTasks: Task[] = [];
   public inProcessTasks: Task[] = [];
@@ -36,7 +35,6 @@ export class TasksComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.getUserContent();
     this.getTasksContent();
 
     this.editTaskForm = new FormGroup({
@@ -48,14 +46,6 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  public getUserContent(): void {
-    this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(user => {
-      this.user = user[Object.keys(user)[0]];
-    }, err => {
-      this.error = err.message;
-    })
-  }
-
   public getTasksContent(): void {
     this.fbTasksService.getTasksFromDb(JSON.parse(localStorage.uid)).subscribe(tasks => {
       for (let key in tasks) {
@@ -63,12 +53,16 @@ export class TasksComponent implements OnInit {
         task.id = key;
         this.tasks.push(task);
 
-        if(task.taskCategory === 'new') {
-          this.newTasks.push(task);
-        } else if (task.taskCategory === 'in-process') {
-          this.inProcessTasks.push(task);
-        } else if (task.taskCategory === 'done') {
-          this.doneTasks.push(task);
+        switch (task.taskCategory) {
+          case 'new':
+            this.newTasks.push(task);
+            break;
+          case 'in-process':
+            this.inProcessTasks.push(task);
+            break;
+          case 'done':
+            this.doneTasks.push(task);
+            break;
         }
       }
     }, err => {
@@ -129,10 +123,9 @@ export class TasksComponent implements OnInit {
   }
 
   public preEditTask(task: Task): void {
+    let validDate = `${task.taskDate.substr(3,2)}.${task.taskDate.substr(0,2)}.${task.taskDate.substr(6,4)}`;
     this.showEditTaskModal = true;
     this.currentEditTask = task;
-
-    let validDate = `${task.taskDate.substr(3,2)}.${task.taskDate.substr(0,2)}.${task.taskDate.substr(6,4)}`;
     this.editTaskForm.patchValue({taskTitle: task.taskTitle});
     this.editTaskForm.patchValue({taskDescription: task.taskDescription});
     this.editTaskForm.patchValue({taskDate: new Date(validDate)});

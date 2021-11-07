@@ -10,14 +10,14 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
 
-  mat-card {
+  .modal-body {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 600px;
   }
 
-  mat-card-title {
+  .modal-title {
     margin-bottom: 30px;
   }
 
