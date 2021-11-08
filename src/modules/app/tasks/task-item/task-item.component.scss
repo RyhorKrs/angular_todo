@@ -6,6 +6,11 @@
   .title {
     max-width: 600px;
     margin-bottom: 20px;
+
+    small {
+      color: gray;
+      font-size: 14px;
+    }
   }
 
   p {
