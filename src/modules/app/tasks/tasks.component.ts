@@ -30,6 +30,11 @@ export class TasksComponent implements OnInit {
 
   public getTasksContent(): void {
     this.fbTasksService.getTasksFromDb(JSON.parse(localStorage.uid)).subscribe(tasks => {
+      this.tasks = [];
+      this.newTasks = [];
+      this.inProcessTasks = [];
+      this.doneTasks = [];
+
       for (let key in tasks) {
         let task = tasks[key];
         task.id = key;
@@ -86,10 +91,6 @@ export class TasksComponent implements OnInit {
     editDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.fbTasksService.editTaskInDb(result, JSON.parse(localStorage.uid), this.currentEditTask.id).subscribe(() => {
-          this.tasks = [];
-          this.newTasks = [];
-          this.inProcessTasks = [];
-          this.doneTasks = [];
           this.getTasksContent();
         }, err => {
           this.error = err.message;
