@@ -36,4 +36,14 @@ export class FbTasksService {
   public deleteTaskInDb(task: Task, userUID: string): Observable<any> {
     return this.http.delete(`${fbUrl}/tasks/${userUID}/${task.id}.json`);
   }
+
+  public editTaskInDb(task: Task, userUID: string, taskId: any): Observable<any> {
+    return this.http.put(`${fbUrl}/tasks/${userUID}/${taskId}.json`, {
+      taskTitle: task.taskTitle,
+      taskDescription: task.taskDescription,
+      taskImportant: task.taskImportant,
+      taskDate: task.taskDate,
+      taskCategory: task.taskCategory
+    });
+  }
 }

@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -14,6 +21,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TasksComponent } from './tasks.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskItemComponent } from './task-item/task-item.component';
+import { DelTaskModalComponent } from './del-task-modal/del-task-modal.component';
+import { EditTaskModalComponent } from './edit-task-modal/edit-task-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -23,17 +32,26 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     TasksComponent, 
     AddTaskFormComponent, 
-    TaskItemComponent
+    TaskItemComponent,
+    DelTaskModalComponent,
+    EditTaskModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatRadioModule,
     MatButtonModule,
+    MatButtonToggleModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

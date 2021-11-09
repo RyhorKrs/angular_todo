@@ -11,6 +11,20 @@
     <input matInput type="text"  placeholder="{{ 'placeholders.description' | translate }}" formControlName="taskDescription">
     <mat-error *ngIf="addTaskForm.get('taskDescription').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
   </mat-form-field>
+
+  <div>
+    <mat-form-field class="example-full-width datepicker" appearance="fill">
+      <mat-label>{{ 'form-field-label.chose-deadline' | translate }}</mat-label>
+      <input autocomplete="none" matInput [matDatepicker]="picker" formControlName="taskDate">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="addTaskForm.get('taskDate').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox color="primary" formControlName="taskImportant">{{ 'form-field-label.important-task' | translate }}</mat-checkbox>
+  </div>
         
   <button mat-raised-button color="primary" [disabled]="addTaskForm.invalid" (click)="addTask()">{{ 'buttons.add-task' | translate }}</button>
         

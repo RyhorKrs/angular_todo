@@ -3,16 +3,37 @@
   <app-add-task-form (onAdd)="addTask($event)"></app-add-task-form>
   <hr>
   <mat-tab-group>
-    <mat-tab label="{{ 'buttons.all' | translate }}"> 
+    <mat-tab label="{{ 'buttons.all' | translate }} ({{tasks.length}})">
       <div *ngIf="tasks.length">
-        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="deleteTask($event)"></app-task-item>
+        <app-task-item *ngFor="let t of tasks" [task]="t" (onDel)="openDelDialog($event)" (onEdit)="openEditDialog($event)"></app-task-item>
       </div>
-      <div *ngIf="!tasks.length">
-        <p>{{ 'buttons.no-tasks' | translate }}</p>
+      <div *ngIf="!tasks.length" class="no-tasks">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
       </div> 
     </mat-tab>
-    <mat-tab label="{{ 'buttons.new' | translate }}"> XXX </mat-tab>
-    <mat-tab label="{{ 'buttons.in-process' | translate }}"> XXX </mat-tab>
-    <mat-tab label="{{ 'buttons.done' | translate }}"> XXX </mat-tab>
+    <mat-tab label="{{ 'buttons.new' | translate }} ({{newTasks.length}})">
+      <div *ngIf="newTasks.length">
+        <app-task-item *ngFor="let t of newTasks" [task]="t" (onDel)="openDelDialog($event)" (onEdit)="openEditDialog($event)"></app-task-item>
+      </div>
+      <div *ngIf="!newTasks.length" class="no-tasks">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'buttons.in-process' | translate }} ({{inProcessTasks.length}})">
+      <div *ngIf="inProcessTasks.length">
+        <app-task-item *ngFor="let t of inProcessTasks" [task]="t" (onDel)="openDelDialog($event)" (onEdit)="openEditDialog($event)"></app-task-item>
+      </div>
+      <div *ngIf="!inProcessTasks.length" class="no-tasks">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'buttons.done' | translate }} ({{doneTasks.length}})">
+      <div *ngIf="doneTasks.length">
+        <app-task-item *ngFor="let t of doneTasks" [task]="t" (onDel)="openDelDialog($event)" (onEdit)="openEditDialog($event)"></app-task-item>
+      </div>
+      <div *ngIf="!doneTasks.length" class="no-tasks">
+        <p>{{ 'messages.no-tasks' | translate }}</p>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

@@ -1,0 +1,38 @@
+<div class="body">
+  <h1 mat-dialog-title>{{ 'content.edit-modal-title' | translate }} <small>{{ data.taskTitle }}</small></h1>
+  <div class="edit-task-form" [formGroup]='editTaskForm'>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>{{ 'form-field-label.title' | translate }}</mat-label>
+      <input matInput type="text" placeholder="{{ 'placeholders.title' | translate }}" formControlName="taskTitle">
+      <mat-error *ngIf="editTaskForm.get('taskTitle').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+    </mat-form-field>
+          
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>{{ 'form-field-label.description' | translate }}</mat-label>
+      <input matInput type="text"  placeholder="{{ 'placeholders.description' | translate }}" formControlName="taskDescription">
+      <mat-error *ngIf="editTaskForm.get('taskDescription').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width datepicker" appearance="fill">
+      <mat-label>{{ 'form-field-label.chose-deadline' | translate }}</mat-label>
+      <input autocomplete="none" matInput [matDatepicker]="picker" formControlName="taskDate">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="editTaskForm.get('taskDate').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-radio-group color="primary" aria-label="Select an category" formControlName="taskCategory">
+      <mat-radio-button value="new">{{ 'buttons.new' | translate }}</mat-radio-button>
+      <mat-radio-button value="in-process">{{ 'buttons.in-process' | translate }}</mat-radio-button>
+      <mat-radio-button value="done">{{ 'buttons.done' | translate }}</mat-radio-button>
+    </mat-radio-group>
+  
+    <mat-checkbox color="primary" formControlName="taskImportant">{{ 'form-field-label.important-task' | translate }}</mat-checkbox>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="editTask()">{{ 'buttons.edit-task' | translate }}</button>
+    <button mat-stroked-button type="button" (click)="hideEditModal()">{{ 'buttons.cancel' | translate }}</button>
+  </div>
+</div>

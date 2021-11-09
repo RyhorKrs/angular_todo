@@ -4,6 +4,14 @@
   max-width: 100%;
   margin-bottom: 50px;
 
+  .datepicker {
+    width: 300px;
+  }
+
+  mat-checkbox {
+    margin-left: 30px;
+  }
+
   button {
     min-width: 150px;
     align-self: flex-end;

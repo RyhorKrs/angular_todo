@@ -1,0 +1,11 @@
+.no-tasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    padding-top: 50px;
+    font-size: 32px;
+    color: gray;
+  }
+}
