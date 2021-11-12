@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { User } from '../interfaces/USER';
 import { Response } from '../interfaces/RESPONSE';
 import { fbUrl } from '../constants/fb';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class FbAuthService {
   public isSignedIn: boolean = false;
-
   public stream$ = new Subject<boolean>();
+  public errorMessage: string = '';
+  public error$ = new Subject<string>();
 
   constructor(
     public fbAuth: AngularFireAuth,
@@ -48,8 +51,13 @@ export class FbAuthService {
     this.stream$.next(this.isSignedIn);
   }
 
-  public changeIsSignedIn(bool:boolean):void {
+  public changeIsSignedIn(bool: boolean): void {
     this.isSignedIn = bool;
     this.stream$.next(this.isSignedIn);
+  }
+
+  public changeErrorMessage(val: string): void {
+    this.errorMessage = val;
+    this.error$.next(this.errorMessage);
   }
 }

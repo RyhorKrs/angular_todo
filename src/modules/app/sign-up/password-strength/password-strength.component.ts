@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+
+import { Subject, Subscription } from 'rxjs';
+
 import { REGS } from '../../../../shared/constants/regs';
 
 @Component({
@@ -7,13 +9,19 @@ import { REGS } from '../../../../shared/constants/regs';
   templateUrl: './password-strength.component.html',
   styleUrls: ['./password-strength.component.scss'],
 })
-export class PasswordStrengthComponent implements OnInit {
+export class PasswordStrengthComponent implements OnInit, OnDestroy {
   @Input() stream$: Subject<string> | any;
 
+  public sub: Subscription | any;
+
   public ngOnInit(): void {
-    this.stream$.subscribe((password:string)=> {
+    this.sub = this.stream$.subscribe((password:string)=> {
       this.checkPasswordStrength(password);
     })
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public passwordStrength: number = 0;

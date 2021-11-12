@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FbTasksService } from 'src/shared/services/fbTasks.service';
-import { Task } from './../../../shared/interfaces/TASK';
+
+import { Subscription } from 'rxjs';
+
 import { DelTaskModalComponent } from './del-task-modal/del-task-modal.component';
 import { EditTaskModalComponent } from './edit-task-modal/edit-task-modal.component';
+import { FbTasksService } from './../../../../src/shared/services/fbTasks.service';
+import { Task } from './../../../../src/shared/interfaces/TASK';
+
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, OnDestroy {
+  public sub: Subscription | any;
   public error: string = '';
   public tasks: Task[] = [];
   public newTasks: Task[] = [];
@@ -25,7 +30,15 @@ export class TasksComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.sub = this.fbTasksService.error$.subscribe((value: string) => {
+      this.error = value;
+    })
+
     this.getTasksContent();
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public getTasksContent(): void {
@@ -52,8 +65,8 @@ export class TasksComponent implements OnInit {
             break;
         }
       }
-    }, err => {
-      this.error = err.message;
+
+      this.fbTasksService.changeErrorMessage('');
     })
   }
 
@@ -61,8 +74,8 @@ export class TasksComponent implements OnInit {
     this.fbTasksService.createTaskInDb(task, JSON.parse(localStorage.uid)).subscribe(task => {
       this.tasks.push(task);
       this.newTasks.push(task);
-    }, err => {
-      this.error = err.message;
+
+      this.fbTasksService.changeErrorMessage('');
     })
   }
 
@@ -77,8 +90,8 @@ export class TasksComponent implements OnInit {
           this.newTasks = this.newTasks.filter(t => t.id !== this.currentDelTask.id);
           this.inProcessTasks = this.inProcessTasks.filter(t => t.id !== this.currentDelTask.id);
           this.doneTasks = this.doneTasks.filter(t => t.id !== this.currentDelTask.id);
-        }, err => {
-          this.error = err.message;
+
+          this.fbTasksService.changeErrorMessage('');
         })
       }
     });
@@ -92,8 +105,8 @@ export class TasksComponent implements OnInit {
       if (result) {
         this.fbTasksService.editTaskInDb(result, JSON.parse(localStorage.uid), this.currentEditTask.id).subscribe(() => {
           this.getTasksContent();
-        }, err => {
-          this.error = err.message;
+
+          this.fbTasksService.changeErrorMessage('');
         })
       } 
     });

@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+
+import { Subject, Subscription } from 'rxjs';
+
+import { FbAuthService } from './../../../../src/shared/services/fbAuth.service';
 import { REGS } from './../../../../src/shared/constants/regs';
-import { FbAuthService } from 'src/shared/services/fbAuth.service';
-import { User } from 'src/shared/interfaces/USER';
+import { User } from './../../../../src/shared/interfaces/USER';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit{
+export class SignUpComponent implements OnInit, OnDestroy {
   public form: FormGroup | any;
   public showPassStrength: boolean = false;
   public error: string = '';
   public showLoader: boolean = false;
-
+  public sub: Subscription | any;
   public stream$ = new Subject<string>();
 
   constructor(
@@ -25,6 +27,10 @@ export class SignUpComponent implements OnInit{
   ) {}
 
   public ngOnInit(): void {
+    this.sub = this.fbService.error$.subscribe((value: string) => {
+      this.error = value;
+    })
+
     this.form = new FormGroup({
       firstname: new FormControl('', [
         Validators.required,
@@ -45,6 +51,10 @@ export class SignUpComponent implements OnInit{
         Validators.required
       ]),
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public passwordInput(event: any): void {
@@ -76,16 +86,16 @@ export class SignUpComponent implements OnInit{
     this.fbService.signUp(user)
     .then(res => {
       user.userUID = res.user?.uid;
-      this.error = '';
+      this.fbService.changeErrorMessage('');
 
       this.fbService.postDataInDb(user).subscribe(user => {
         this.showLoader = false;
-        this.error = '';
+        this.fbService.changeErrorMessage('');
 
         this.fbService.signIn(user.userEmail, user.userPassword)
         .then(res => {
           this.fbService.changeIsSignedIn(true);
-          this.error = '';
+          this.fbService.changeErrorMessage('');
           localStorage.setItem('uid', JSON.stringify(res.user?.uid));
           this.showLoader = false;
           this.form.reset();
@@ -97,8 +107,7 @@ export class SignUpComponent implements OnInit{
           this.showLoader = false;
           this.form.reset();
         })
-      }, err => {
-        this.error = err.message;
+      }, () => {
         this.showLoader = false;
       })
     })
