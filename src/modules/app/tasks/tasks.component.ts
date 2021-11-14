@@ -6,8 +6,8 @@ import { Subscription } from 'rxjs';
 import { DelTaskModalComponent } from './del-task-modal/del-task-modal.component';
 import { EditTaskModalComponent } from './edit-task-modal/edit-task-modal.component';
 import { FbTasksService } from './../../../../src/shared/services/fbTasks.service';
+import { FbCommentsService } from 'src/shared/services/fbComments.service';
 import { Task } from './../../../../src/shared/interfaces/TASK';
-
 
 @Component({
   selector: 'app-tasks',
@@ -16,6 +16,7 @@ import { Task } from './../../../../src/shared/interfaces/TASK';
 })
 export class TasksComponent implements OnInit, OnDestroy {
   public sub: Subscription | any;
+  public sub2: Subscription | any;
   public error: string = '';
   public tasks: Task[] = [];
   public newTasks: Task[] = [];
@@ -26,6 +27,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   constructor (
     private fbTasksService: FbTasksService,
+    private fbCommentsService: FbCommentsService,
     public dialog: MatDialog
   ) {}
 
@@ -34,11 +36,16 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.error = value;
     })
 
+    this.sub2 = this.fbCommentsService.error$.subscribe((value: string) => {
+      this.error = value;
+    })
+
     this.getTasksContent();
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.sub2.unsubscribe();
   }
 
   public getTasksContent(): void {
@@ -71,10 +78,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   public addTask(task: Task): void {
-    this.fbTasksService.createTaskInDb(task, JSON.parse(localStorage.uid)).subscribe(task => {
-      this.tasks.push(task);
-      this.newTasks.push(task);
-
+    this.fbTasksService.createTaskInDb(task, JSON.parse(localStorage.uid)).subscribe(() => { 
+      this.getTasksContent();
       this.fbTasksService.changeErrorMessage('');
     })
   }
@@ -86,11 +91,10 @@ export class TasksComponent implements OnInit, OnDestroy {
     delDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.fbTasksService.deleteTaskInDb(this.currentDelTask, JSON.parse(localStorage.uid)).subscribe(() => {
-          this.tasks = this.tasks.filter(t => t.id !== this.currentDelTask.id);
-          this.newTasks = this.newTasks.filter(t => t.id !== this.currentDelTask.id);
-          this.inProcessTasks = this.inProcessTasks.filter(t => t.id !== this.currentDelTask.id);
-          this.doneTasks = this.doneTasks.filter(t => t.id !== this.currentDelTask.id);
-
+          this.fbCommentsService.deleteCommentInDb('', JSON.parse(localStorage.uid), this.currentDelTask.id).subscribe(() => {
+          this.getTasksContent();
+          this.fbTasksService.changeErrorMessage('');
+          })
           this.fbTasksService.changeErrorMessage('');
         })
       }
@@ -105,7 +109,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       if (result) {
         this.fbTasksService.editTaskInDb(result, JSON.parse(localStorage.uid), this.currentEditTask.id).subscribe(() => {
           this.getTasksContent();
-
           this.fbTasksService.changeErrorMessage('');
         })
       } 

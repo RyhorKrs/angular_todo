@@ -7,7 +7,29 @@
       <mat-card-actions>
         <button mat-raised-button color="warn" (click)="delTask()">{{ 'buttons.delete-task' | translate }}</button>
         <button mat-raised-button (click)="editTask()">{{ 'buttons.edit-task' | translate }}</button>
-      </mat-card-actions>       
+      </mat-card-actions>  
+      <p class="show-comments-btn" *ngIf="!showComments" (click)="showComments = true">{{ 'buttons.show-comments' | translate }}</p> 
+      <p class="show-comments-btn" *ngIf="showComments" (click)="showComments = false">{{ 'buttons.hide-comments' | translate }}</p>
+      <div class="comments_body" *ngIf="showComments">
+        <p class="no-comments" *ngIf="!comments.length; else commentsBlock">{{ 'messages.no-comments' | translate }}</p>
+
+        <ng-template #commentsBlock class="comments">
+          <div class="comments_list">
+            <app-comment-item *ngFor="let comment of comments" [comment]="comment" (onDel)="openDelCommentDialog($event)" (onEdit)="openEditCommentDialog($event)"></app-comment-item>
+          </div>
+        </ng-template>
+
+        <div class="add-comment-form" [formGroup]="addCommentForm">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>{{ 'form-field-label.leave-comment' | translate }}</mat-label>
+            <textarea matInput placeholder="{{ 'placeholders.comment' | translate }}" formControlName="commentText"></textarea>
+            <mat-error *ngIf="addCommentForm.get('commentText').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+          </mat-form-field>
+          <button mat-raised-button (click)="addComment()">
+            <span class="material-icons">add</span>
+          </button>
+        </div>
+      </div>    
   </mat-card-content>
 </mat-card>
   

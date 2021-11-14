@@ -24,6 +24,9 @@ import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { DelTaskModalComponent } from './del-task-modal/del-task-modal.component';
 import { EditTaskModalComponent } from './edit-task-modal/edit-task-modal.component';
+import { CommentItemComponent } from './task-item/comment-item/comment-item.component';
+import { DelCommentModalComponent } from './task-item/del-comment-modal/del-comment-modal.component';
+import { EditCommentModalComponent } from './task-item/edit-comment-modal/edit-comment-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,7 +39,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddTaskFormComponent, 
     TaskItemComponent,
     DelTaskModalComponent,
-    EditTaskModalComponent
+    EditTaskModalComponent,
+    CommentItemComponent,
+    DelCommentModalComponent,
+    EditCommentModalComponent
   ],
   imports: [
     BrowserModule,
