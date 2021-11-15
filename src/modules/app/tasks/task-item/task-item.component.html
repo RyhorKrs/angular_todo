@@ -1,5 +1,5 @@
 <mat-card class='card'>
-  <mat-card-title class='title'>{{task.taskTitle}} <small>{{task.taskCategory}}</small></mat-card-title>
+  <mat-card-title class='title'>{{task.taskTitle}} <small>({{task.taskCreate}})</small></mat-card-title>
     <mat-card-content>
       <p>{{task.taskDescription}}</p>
       <p><b *ngIf="task.taskImportant">{{ 'form-field-label.important-task' | translate }}</b></p>

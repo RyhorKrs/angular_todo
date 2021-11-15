@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,

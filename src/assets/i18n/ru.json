@@ -16,7 +16,13 @@
     "description": "Описание*",
     "chose-deadline": "Укажите срок выполнения*",
     "important-task": "Важная задача!",
-    "leave-comment": "Оставьте комментарий"
+    "leave-comment": "Оставьте комментарий",
+    "edited-comment": "Обновленный комментарий",
+    "sort-by": "Сортировать по:",
+    "sort-new": "Сначала новые (по ум.)",
+    "sort-old": "Сначала старые",
+    "sort-a": "от А до Я",
+    "sort-z": "от Я до А"
   },
   "placeholders": {
     "email": "example@mail.ru",

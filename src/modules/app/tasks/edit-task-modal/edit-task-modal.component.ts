@@ -33,7 +33,8 @@ export class EditTaskModalComponent implements OnInit {
       taskDescription: this.editTaskForm.value.taskDescription,
       taskImportant: this.editTaskForm.value.taskImportant,
       taskDate: this.editTaskForm.value.taskDate.toLocaleDateString(),
-      taskCategory: this.editTaskForm.value.taskCategory
+      taskCategory: this.editTaskForm.value.taskCategory,
+      taskCreate: this.data.taskCreate
     };
 
     this.editDialogRef.close(editedTask);

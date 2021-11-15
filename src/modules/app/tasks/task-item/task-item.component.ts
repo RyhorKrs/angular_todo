@@ -1,6 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+
+import { Subscription } from "rxjs";
 
 import { DelCommentModalComponent } from "./del-comment-modal/del-comment-modal.component";
 import { EditCommentModalComponent } from "./edit-comment-modal/edit-comment-modal.component";
@@ -13,7 +15,7 @@ import { Task } from './../../../../../src/shared/interfaces/TASK';
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.scss']
 })
-export class TaskItemComponent implements OnInit {
+export class TaskItemComponent implements OnInit, OnDestroy {
   @Input() task: Task | any;
   @Output() onDel: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() onEdit: EventEmitter<Task> = new EventEmitter<Task>();
@@ -23,6 +25,7 @@ export class TaskItemComponent implements OnInit {
   public comments: Comment[] = [];
   public currentDelComment: any = {};
   public currentEditComment: any = {};
+  public sub: Subscription | any;
 
   constructor (
     private fbCommentsService: FbCommentsService,
@@ -30,11 +33,19 @@ export class TaskItemComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.sub = this.fbCommentsService.stream$.subscribe(() => {
+      this.getCommentsContent();
+    })
+
     this.addCommentForm = new FormGroup({
       commentText: new FormControl('', [Validators.required])
     });
 
     this.getCommentsContent();
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public delTask(): void {
@@ -55,6 +66,13 @@ export class TaskItemComponent implements OnInit {
         this.comments.push(task);
       }
 
+      this.comments.sort((comment1: Comment, comment2: Comment) => {
+        let date1 = new Date(`${+comment1.commentDate.substr(3,2)}.${+comment1.commentDate.substr(0,2)}.${comment1.commentDate.substr(6,4)}`);
+        let date2 = new Date(`${+comment2.commentDate.substr(3,2)}.${+comment2.commentDate.substr(0,2)}.${comment2.commentDate.substr(6,4)}`);
+        
+        return +date2*-1 - +date1*-1;
+      });
+
       this.fbCommentsService.changeErrorMessage('');
     })
   }
@@ -68,7 +86,7 @@ export class TaskItemComponent implements OnInit {
 
     this.fbCommentsService.createCommentInDb(newComment, JSON.parse(localStorage.uid), this.task.id).subscribe(() => {
       this.addCommentForm.reset();
-      this.getCommentsContent();
+      this.fbCommentsService.stream$.next();
       this.fbCommentsService.changeErrorMessage('');
     })
   }
@@ -80,7 +98,7 @@ export class TaskItemComponent implements OnInit {
     delDialogRefCom.afterClosed().subscribe(result => {
       if (result) {
         this.fbCommentsService.deleteCommentInDb(this.currentDelComment.id, JSON.parse(localStorage.uid), this.task.id).subscribe(() => {
-          this.getCommentsContent();
+          this.fbCommentsService.stream$.next();
           this.fbCommentsService.changeErrorMessage('');
         })
       }
@@ -94,7 +112,7 @@ export class TaskItemComponent implements OnInit {
     editDialogRefCom.afterClosed().subscribe(result => {
       if (result) {
         this.fbCommentsService.editCommentInDb(result, JSON.parse(localStorage.uid),this.task.id, this.currentEditComment.id).subscribe(() => {
-          this.getCommentsContent();
+          this.fbCommentsService.stream$.next();
           this.fbCommentsService.changeErrorMessage('');
         })
       } 

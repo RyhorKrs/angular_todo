@@ -28,7 +28,8 @@ export class AddTaskFormComponent implements OnInit{
       taskDescription: this.addTaskForm.value.taskDescription,
       taskImportant: !!this.addTaskForm.value.taskImportant,
       taskDate: this.addTaskForm.value.taskDate.toLocaleDateString(),
-      taskCategory: 'new'
+      taskCategory: 'new',
+      taskCreate: new Date().toLocaleDateString()
     };
 
     this.onAdd.emit(task);

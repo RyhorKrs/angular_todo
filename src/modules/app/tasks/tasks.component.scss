@@ -9,3 +9,14 @@
     color: gray;
   }
 }
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.sort-select {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

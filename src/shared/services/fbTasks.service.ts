@@ -47,7 +47,8 @@ export class FbTasksService {
       taskDescription: task.taskDescription,
       taskImportant: task.taskImportant,
       taskDate: task.taskDate,
-      taskCategory: task.taskCategory
+      taskCategory: task.taskCategory,
+      taskCreate: task.taskCreate
     });
   }
 

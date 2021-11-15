@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 
 import { Subscription } from 'rxjs';
 
@@ -24,6 +25,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   public doneTasks: Task[] = [];
   public currentDelTask: any = {};
   public currentEditTask: any = {};
+  public sort: string = '1';
 
   constructor (
     private fbTasksService: FbTasksService,
@@ -59,7 +61,11 @@ export class TasksComponent implements OnInit, OnDestroy {
         let task = tasks[key];
         task.id = key;
         this.tasks.push(task);
+      }
 
+      this.sortBy(this.sort);
+
+      for (let task of this.tasks) {
         switch (task.taskCategory) {
           case 'new':
             this.newTasks.push(task);
@@ -114,4 +120,44 @@ export class TasksComponent implements OnInit, OnDestroy {
       } 
     });
   } 
+
+  public selectedValue(event: any): void {
+    this.sort = event.value;
+    this.getTasksContent();
+  }
+
+  public sortBy(option: string): void {
+    switch (option) {
+      case '1':
+        this.tasks.sort((task1: Task, task2: Task) => {
+          let date1 = new Date(`${+task1.taskCreate.substr(3,2)}.${+task1.taskCreate.substr(0,2)}.${task1.taskCreate.substr(6,4)}`);
+          let date2 = new Date(`${+task2.taskCreate.substr(3,2)}.${+task2.taskCreate.substr(0,2)}.${task2.taskCreate.substr(6,4)}`);
+          
+          return +date1*-1 - +date2*-1;
+        });
+        break;
+      case '2':
+        this.tasks.sort((task1: Task, task2: Task) => {
+          let date1 = new Date(`${+task1.taskCreate.substr(3,2)}.${+task1.taskCreate.substr(0,2)}.${task1.taskCreate.substr(6,4)}`);
+          let date2 = new Date(`${+task2.taskCreate.substr(3,2)}.${+task2.taskCreate.substr(0,2)}.${task2.taskCreate.substr(6,4)}`);
+          
+          return +date2*-1 - +date1*-1;
+        });
+        break;
+      case '3':
+        this.tasks.sort((task1: Task, task2: Task) => {
+          if (task1.taskTitle < task2.taskTitle) return -1;
+          if (task1.taskTitle > task2.taskTitle) return 1;
+          return 0;
+        });
+        break;
+      case '4':
+        this.tasks.sort((task1: Task, task2: Task) => {
+          if (task1.taskTitle > task2.taskTitle) return -1;
+          if (task1.taskTitle < task2.taskTitle) return 1;
+          return 0;
+        });
+        break;
+    }
+  }
 }

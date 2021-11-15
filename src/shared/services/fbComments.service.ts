@@ -12,6 +12,7 @@ import { fbUrl } from '../constants/fb';
 export class FbCommentsService {
   public errorMessage: string = '';
   public error$ = new Subject<string>();
+  public stream$ = new Subject<void>();
 
   constructor(
     private http: HttpClient
