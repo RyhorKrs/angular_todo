@@ -94,9 +94,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
         this.fbService.signIn(user.userEmail, user.userPassword)
         .then(res => {
+          localStorage.setItem('uid', JSON.stringify(res.user?.uid));
           this.fbService.changeIsSignedIn(true);
           this.fbService.changeErrorMessage('');
-          localStorage.setItem('uid', JSON.stringify(res.user?.uid));
           this.showLoader = false;
           this.form.reset();
           this.router.navigate(['/tasks']);

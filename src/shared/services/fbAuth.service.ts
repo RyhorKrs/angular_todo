@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../interfaces/USER';
@@ -12,7 +12,7 @@ import { fbUrl } from '../constants/fb';
 @Injectable({providedIn: 'root'})
 export class FbAuthService {
   public isSignedIn: boolean = false;
-  public stream$ = new Subject<boolean>();
+  public stream$ = new BehaviorSubject<boolean>(!!localStorage.getItem('uid'));
   public errorMessage: string = '';
   public error$ = new Subject<string>();
 

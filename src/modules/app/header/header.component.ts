@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 import { FbAuthService } from './../../../../src/shared/services/fbAuth.service';
-import { LocalStorageService } from './../../../../src/shared/services/localStorage.service';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +14,12 @@ import { LocalStorageService } from './../../../../src/shared/services/localStor
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public isSignIn: boolean = false;
-  public showUserMenu: boolean = false;
   public language: string = 'en';
-  public currentUser: string = 'xxx';
+  public currentUser: string = '';
+  public currentAvatar: string = '';
   public sub: Subscription | any;
 
   constructor (
-    private localStorageService: LocalStorageService,
     private router: Router,
     public translate: TranslateService,
     public fbService: FbAuthService
@@ -30,9 +28,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.sub = this.fbService.stream$.subscribe((value: boolean) => {
       this.isSignIn = value;
-    })
 
-    this.isSignIn = !!this.localStorageService.getItem('uid');
+      if(this.isSignIn) {
+        this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(res => {
+          let user = res[Object.keys(res)[0]];
+          this.currentUser = user.userEmail;
+          this.currentAvatar = user.userFirstName[0] + user.userLastName[0];
+        })
+      }
+    })
   }
 
   public ngOnDestroy(): void {
@@ -41,18 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public logoutUser():void {
     this.fbService.logout();
-
-    this.showUserMenu = false;
     this.router.navigate(['/sign-in']);
-  }
-
-  public toggleUserMenu():void {
-    this.showUserMenu = !this.showUserMenu;
   }
 
   public toggleLanguage(): void {
     this.language = this.language === 'en' ? 'ru' : 'en';
-    
     this.translate.use(this.language);
   }
 }

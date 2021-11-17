@@ -37,9 +37,9 @@ export class SignInComponent implements OnInit{
     this.showLoader = true;
     this.fbService.signIn(this.form.value.email, this.form.value.password)
     .then(res => {
+      localStorage.setItem('uid', JSON.stringify(res.user?.uid));
       this.fbService.changeIsSignedIn(true);
       this.error = '';
-      localStorage.setItem('uid', JSON.stringify(res.user?.uid))
       this.showLoader = false;
       this.router.navigate(['/tasks']);
     })
