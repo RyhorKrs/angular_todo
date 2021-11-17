@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

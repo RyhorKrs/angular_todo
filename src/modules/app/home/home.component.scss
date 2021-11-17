@@ -1,28 +1,58 @@
 .page_body {
-  background-image: url('./../../../assets/images/background-image-1.png');
-  background-repeat: no-repeat;
-  background-size: 565px 400px;
-  background-position: right;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
 
-   h1 {
-    font-size: 38px;
-    line-height: 42px;
-    max-width: 400px;
-    margin-bottom: 30px;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 400px;
+
+    h1 {
+      font-size: 38px;
+      line-height: 42px;
+      max-width: 400px;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 18px;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      width: 160px;
+    }
   }
-
-  p {
-    font-size: 18px;
-    max-width: 480px;
-    margin-bottom: 40px;
+  
+  img {
+    max-width: 565px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
+}
 
-  button {
-    width: 160px;
+@media(max-width: 1050px) {
+  .page_body {
+    img {
+      opacity: 0.8;
+      z-index: -5;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .page_body {
+    div {
+      height: 360px;
+    }
+
+    img {
+      width: 500px;
+    }
   }
 }

@@ -18,3 +18,19 @@
     }
   }
 }
+
+@media(max-width: 576px) {
+  .body {
+    .actions {
+      button {
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

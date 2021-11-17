@@ -37,3 +37,41 @@
     margin: 10px;
   }
 }
+
+@media(max-width: 768px) {
+  .body {
+    .edit-task-form {
+      width: 400px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media(max-width: 576px) {
+  .body {
+    .edit-task-form {
+      width: 240px;
+      margin-bottom: 10px;
+
+      mat-form-field.datepicker {
+        width: 200px;
+      }
+
+      mat-radio-group {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+    
+        mat-radio-button {
+          margin: 5px;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
