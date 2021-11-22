@@ -21,4 +21,31 @@
   b {
     color: rgb(63, 81, 181);
   }
+
+  .show-comments-btn {
+    cursor: pointer;
+    color: rgb(63, 81, 181);
+    text-decoration: underline;
+  }
+
+  .no-comments {
+    text-align: center;
+  }
+
+  .add-comment-form {
+    display: flex; 
+    align-items: center;
+
+    mat-form-field {
+      width: 100%; 
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px; 
+      margin-left: 15px; 
+      margin-bottom: 19px; 
+      align-self: flex-end;
+    }
+  }
 }

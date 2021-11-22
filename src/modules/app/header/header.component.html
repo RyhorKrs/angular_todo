@@ -6,21 +6,19 @@
       </a>
       <button class='lang-btn' mat-raised-button (click)="toggleLanguage()">{{language}}</button>
     </li>
-    <li *ngIf='!isSignIn'><a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a></li>
+    <li *ngIf='!isSignIn'>
+      <a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a>
+    </li>
     <li *ngIf='isSignIn' class='sign-in-li'>
-      <img class='user-avatar' src='./../../../assets/images/anonymous-user.png' alt='User avatar' (click)='toggleUserMenu()'>
-      <div *ngIf='showUserMenu' class='user-menu-body'>
-        <mat-card>
-          <ul>
-            <li class='user-email-li'>{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</li>
-            <hr>
-            <li><a mat-button routerLink='/tasks'>{{ 'buttons.my-tasks' | translate }}</a></li>
-            <li><a mat-button routerLink='/tasks'>{{ 'buttons.my-profile' | translate }}</a></li>
-            <hr>
-            <li><button mat-button color='warn' (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button></li>
-          </ul>
-        </mat-card>
-      </div>
+      <div [matMenuTriggerFor]="menu" class='user-avatar'><span>{{currentAvatar}}</span></div>
+      <mat-menu class='menu-body' #menu='matMenu' yPosition="above" xPosition="before">
+        <p style="font-weight: 500; padding: 16px; margin: 0; width: 160px;">{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</p>
+        <hr>
+        <button mat-menu-item routerLink='/tasks'>{{ 'buttons.my-tasks' | translate }}</button>
+        <button mat-menu-item routerLink='/profile'>{{ 'buttons.my-profile' | translate }}</button>
+        <hr>
+        <button mat-menu-item style="font-weight: 500; color: rgb(244, 67, 54); text-align: center;" (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button>
+      </mat-menu>
     </li>
   </ul>
 </nav>

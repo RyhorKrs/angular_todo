@@ -1,0 +1,7 @@
+<div class="body">
+  <h1 mat-dialog-title>{{ 'content.del-comment-modal-title' | translate }} <small>{{ data.commentText }}</small>?</h1>
+  <div mat-dialog-actions class="actions">
+    <button mat-raised-button color="primary" (click)="deleteComment()">{{ 'buttons.yes' | translate }}</button>
+    <button mat-stroked-button type="button" (click)="hideDelModal()">{{ 'buttons.no' | translate }}</button>
+  </div>
+</div>

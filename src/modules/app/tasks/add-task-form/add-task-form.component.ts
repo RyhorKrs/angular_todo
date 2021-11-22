@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Task } from './../../../../shared/interfaces/TASK';
 
 @Component({
@@ -17,7 +18,7 @@ export class AddTaskFormComponent implements OnInit{
       taskTitle: new FormControl('', [Validators.required]),
       taskDescription: new FormControl('', [Validators.required]),
       taskImportant: new FormControl(false),
-      taskDate: new FormControl('', [Validators.required]),
+      taskDate: new FormControl('', [Validators.required])
     });
   }
 
@@ -27,7 +28,8 @@ export class AddTaskFormComponent implements OnInit{
       taskDescription: this.addTaskForm.value.taskDescription,
       taskImportant: !!this.addTaskForm.value.taskImportant,
       taskDate: this.addTaskForm.value.taskDate.toLocaleDateString(),
-      taskCategory: 'new'
+      taskCategory: 'new',
+      taskCreate: new Date().toLocaleDateString()
     };
 
     this.onAdd.emit(task);

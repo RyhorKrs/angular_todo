@@ -1,0 +1,16 @@
+<div class="body">
+  <h1 mat-dialog-title>{{ 'content.edit-modal-title' | translate }} <small>{{ data.commentText }}</small></h1>
+  <div class="edit-comment-form" [formGroup]='editCommentForm'>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>{{ 'form-field-label.edited-comment' | translate }}</mat-label>
+      <input matInput type="text" placeholder="{{ 'placeholders.comment' | translate }}" formControlName="commentText">
+      <mat-error *ngIf="editCommentForm.get('commentText').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+    </mat-form-field>
+          
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-raised-button color="primary" (click)="editComment()">{{ 'buttons.edit-comment' | translate }}</button>
+    <button mat-stroked-button type="button" (click)="hideEditModal()">{{ 'buttons.cancel' | translate }}</button>
+  </div>
+</div>

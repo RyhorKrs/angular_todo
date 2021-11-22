@@ -30,6 +30,20 @@
   }
 }
 
+@media(max-width: 576px) {
+  .page_body {
+    .card {
+      max-width: 450px;
+
+      mat-card-content > div {
+        mat-form-field {
+          width: 250px;
+        }
+      }
+    }
+  }
+}
+
 .loader {
   position: absolute;
   top: 0;

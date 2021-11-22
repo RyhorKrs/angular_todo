@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { Task } from '../interfaces/TASK';
 import { Response } from '../interfaces/RESPONSE';
 import { fbUrl } from '../constants/fb';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class FbTasksService {
+  public errorMessage: string = '';
+  public error$ = new Subject<string>();
 
   constructor(
     private http: HttpClient
@@ -43,7 +47,13 @@ export class FbTasksService {
       taskDescription: task.taskDescription,
       taskImportant: task.taskImportant,
       taskDate: task.taskDate,
-      taskCategory: task.taskCategory
+      taskCategory: task.taskCategory,
+      taskCreate: task.taskCreate
     });
+  }
+
+  public changeErrorMessage(val: string): void {
+    this.errorMessage = val;
+    this.error$.next(this.errorMessage);
   }
 }

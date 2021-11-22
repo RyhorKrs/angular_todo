@@ -6,15 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { AppRoutingModule } from './../app-routing.module';
-import { SignUpComponent } from './sign-up.component';
-import { PasswordStrengthComponent } from './password-strength/password-strength.component';
+import { ProfileComponent } from './profile.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -23,19 +24,20 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    SignUpComponent, 
-    PasswordStrengthComponent
+    ProfileComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule, 
+    BrowserModule, 
     FormsModule, 
     ReactiveFormsModule, 
     MatCardModule, 
     MatFormFieldModule, 
     MatInputModule, 
+    MatRadioModule,
     MatButtonModule, 
-    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -48,6 +50,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [],
-  bootstrap: [SignUpComponent]
+  bootstrap: [ProfileComponent]
 })
-export class SignUpModule { }
+export class ProfileModule { }

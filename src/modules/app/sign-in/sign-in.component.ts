@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { FbAuthService } from 'src/shared/services/fbAuth.service';
 import { REGS } from './../../../../src/shared/constants/regs';
 
@@ -32,13 +33,13 @@ export class SignInComponent implements OnInit{
     });
   }
 
-  public onSignIn() {
+  public onSignIn(): void {
     this.showLoader = true;
     this.fbService.signIn(this.form.value.email, this.form.value.password)
     .then(res => {
+      localStorage.setItem('uid', JSON.stringify(res.user?.uid));
       this.fbService.changeIsSignedIn(true);
       this.error = '';
-      localStorage.setItem('uid', JSON.stringify(res.user?.uid))
       this.showLoader = false;
       this.router.navigate(['/tasks']);
     })

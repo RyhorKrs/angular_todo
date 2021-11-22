@@ -1,0 +1,48 @@
+<div class='page_body'>
+  <mat-card class='card'>
+    <mat-card-title class='title'>{{ 'content.profile' | translate }} {{ currentUser.userFirstName }} {{ currentUser.userLastName }}</mat-card-title>
+    <mat-card-content>
+      <div [formGroup]='editProfileForm'>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>{{ 'form-field-label.first-name' | translate }}</mat-label>
+          <input matInput type="text" placeholder="{{ 'placeholders.first-name' | translate }}" formControlName="firstname">
+          <mat-error *ngIf="editProfileForm.get('firstname').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+          <mat-error *ngIf="editProfileForm.get('firstname').hasError('minlength')">{{ 'errors.not-valid' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>{{ 'form-field-label.last-name' | translate }}</mat-label>
+          <input matInput type="text" placeholder="{{ 'placeholders.last-name' | translate }}" formControlName="lastname">
+          <mat-error *ngIf="editProfileForm.get('lastname').hasError('required')">{{ 'errors.required' | translate }}</mat-error>
+          <mat-error *ngIf="editProfileForm.get('lastname').hasError('minlength')">{{ 'errors.not-valid' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>{{ 'form-field-label.email' | translate }}</mat-label>
+          <input matInput type="text" placeholder="{{ 'placeholders.email' | translate }}" formControlName="email" readonly>
+        </mat-form-field>  
+
+        <mat-form-field class="example-full-width datepicker" appearance="fill">
+          <mat-label>{{ 'form-field-label.date-of-birth' | translate }}</mat-label>
+          <input autocomplete="none" matInput [matDatepicker]="picker" formControlName="birth">
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-radio-group color="primary" aria-label="gender" formControlName="gender">
+          <mat-radio-button value="man">{{ 'form-field-label.male' | translate }}</mat-radio-button>
+          <mat-radio-button value="woman">{{ 'form-field-label.female' | translate }}</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-error class="error">{{ error }}</mat-error>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" (click)="editData()" [disabled]="editProfileForm.invalid">{{ 'buttons.save' | translate }}</button>
+        </mat-card-actions>
+        
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

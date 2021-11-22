@@ -1,7 +1,18 @@
 <div class='page_body'>
-  {{ error }}
+  <p class="error">{{ error }}</p>
   <app-add-task-form (onAdd)="addTask($event)"></app-add-task-form>
   <hr>
+
+  <mat-form-field appearance="fill" class="sort-select">
+    <mat-label>{{ 'form-field-label.sort-by' | translate }}</mat-label>
+    <mat-select value="{{ sort }}" (selectionChange)="selectedValue($event)">
+      <mat-option value="1">{{ 'form-field-label.sort-new' | translate }}</mat-option>
+      <mat-option value="2">{{ 'form-field-label.sort-old' | translate }}</mat-option>
+      <mat-option value="3">{{ 'form-field-label.sort-a' | translate }}</mat-option>
+      <mat-option value="4">{{ 'form-field-label.sort-z' | translate }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <mat-tab-group>
     <mat-tab label="{{ 'buttons.all' | translate }} ({{tasks.length}})">
       <div *ngIf="tasks.length">

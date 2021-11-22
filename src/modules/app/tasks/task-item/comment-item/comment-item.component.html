@@ -1,0 +1,14 @@
+<mat-card class='card'>
+  <mat-card-title class='title'>{{comment.commentText}} 
+    <small>(<span *ngIf="comment.commentIsEdited">{{ 'messages.edited' | translate }} </span>{{comment.commentDate}})</small>
+  </mat-card-title>
+  <mat-card-actions class="actions">
+    <div class="comment_button" (click)="editComment()">
+      <span class="material-icons">edit</span>
+    </div>
+    <div class="comment_button" (click)="delComment()">
+      <span class="material-icons">delete</span>
+    </div>
+  </mat-card-actions>   
+</mat-card>
+  

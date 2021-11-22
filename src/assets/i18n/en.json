@@ -15,14 +15,25 @@
     "title": "Title*",
     "description": "Description*",
     "chose-deadline": "Choose a date of deadline*",
-    "important-task": "Important task!"
+    "important-task": "Important task!",
+    "leave-comment": "Leave a comment",
+    "edited-comment": "Edited comment",
+    "sort-by": "Sort by:",
+    "sort-new": "New first (default)",
+    "sort-old": "Old first",
+    "sort-a": "from A to Z",
+    "sort-z": "from Z to A",
+    "date-of-birth": "Date of birth",
+    "male": "Male",
+    "female": "Female"
   },
   "placeholders": {
     "email": "example@mail.ru",
     "first-name": "Ivan",
     "last-name": "Ivanov",
     "title": "Title...",
-    "description": "Description..."
+    "description": "Description...",
+    "comment": "Your comment..."
   },
   "buttons": {
     "sign-in": "SignIn",
@@ -42,7 +53,11 @@
     "yes": "Yes",
     "no": "No",
     "edit-task": "Edit task",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "show-comments": "Show comments",
+    "hide-comments": "Hide comments",
+    "edit-comment": "Edit comment",
+    "save": "Save changes"
   },
   "errors": {
     "required": "You should enter a value",
@@ -63,11 +78,15 @@
     "very-strong": "Very strong",
     "complete": "Complete",
     "no-tasks": "No tasks",
-    "deadline-date": "Date of deadline:"
+    "deadline-date": "Date of deadline:",
+    "edited": "edited",
+    "no-comments": "No comments yet..."
   },
   "content": {
     "home-page-subtitle": "Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use).",
     "del-modal-title": "Do you really want to delete the task:",
-    "edit-modal-title": "Edit:"
+    "edit-modal-title": "Edit:",
+    "del-comment-modal-title": "Do you really want to delete the comment:",
+    "profile": "Profile:"
   }
 }

@@ -17,3 +17,19 @@
     align-self: flex-end;
   }
 }
+
+@media(max-width: 576px) {
+  .add-task-form {
+    .datepicker {
+      width: 100%;
+    }
+  
+    mat-checkbox {
+      margin-left: 10px;
+    }
+  
+    button {
+      margin-top: 20px;
+    }
+  }
+}

@@ -8,27 +8,14 @@
     margin-bottom: 30px;
   }
   
-  .edit-task-form {
+  .edit-comment-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 560px;
-    margin-bottom: 30px;
   
     mat-form-field {
         width: 100%;
-  
-      &.datepicker {
-        width: 300px;
-      }
-    }
-  
-    mat-radio-group {
-      margin-bottom: 15px;
-  
-      mat-radio-button {
-        margin: 0 10px;
-      }
     }
   }
 
@@ -40,7 +27,7 @@
 
 @media(max-width: 768px) {
   .body {
-    .edit-task-form {
+    .edit-comment-form {
       width: 400px;
       margin-bottom: 20px;
     }
@@ -49,23 +36,9 @@
 
 @media(max-width: 576px) {
   .body {
-    .edit-task-form {
+    .edit-comment-form {
       width: 240px;
       margin-bottom: 10px;
-
-      mat-form-field.datepicker {
-        width: 200px;
-      }
-
-      mat-radio-group {
-        margin-bottom: 15px;
-        display: flex;
-        flex-direction: column;
-    
-        mat-radio-button {
-          margin: 5px;
-        }
-      }
     }
 
     .actions {
