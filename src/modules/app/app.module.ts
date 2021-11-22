@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { TasksModule } from './tasks/tasks.module';
+import { ProfileModule } from './profile/profile.module';
 import { SignInModule } from './sign-in/sign-in.module';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { ErrorInterceptor } from 'src/shared/services/error.interceptor';
@@ -33,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderModule,
     HomeModule,
     TasksModule,
+    ProfileModule,
     SignInModule,
     SignUpModule,
     HttpClientModule,

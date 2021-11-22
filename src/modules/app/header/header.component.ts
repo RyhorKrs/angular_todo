@@ -30,17 +30,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isSignIn = value;
 
       if(this.isSignIn) {
-        this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(res => {
-          let user = res[Object.keys(res)[0]];
-          this.currentUser = user.userEmail;
-          this.currentAvatar = user.userFirstName[0] + user.userLastName[0];
-        })
+        this.getData();
       }
     })
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  public getData(): void {
+    this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(res => {
+      let user = res[Object.keys(res)[0]];
+      this.currentUser = user.userEmail;
+      this.currentAvatar = user.userFirstName[0] + user.userLastName[0];
+    })
   }
 
   public logoutUser():void {

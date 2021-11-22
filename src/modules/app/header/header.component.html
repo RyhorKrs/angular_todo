@@ -15,7 +15,7 @@
         <p style="font-weight: 500; padding: 16px; margin: 0; width: 160px;">{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</p>
         <hr>
         <button mat-menu-item routerLink='/tasks'>{{ 'buttons.my-tasks' | translate }}</button>
-        <button mat-menu-item routerLink='/tasks'>{{ 'buttons.my-profile' | translate }}</button>
+        <button mat-menu-item routerLink='/profile'>{{ 'buttons.my-profile' | translate }}</button>
         <hr>
         <button mat-menu-item style="font-weight: 500; color: rgb(244, 67, 54); text-align: center;" (click)='logoutUser()'>{{ 'buttons.logout' | translate }}</button>
       </mat-menu>

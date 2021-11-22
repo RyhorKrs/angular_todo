@@ -1,0 +1,45 @@
+.page_body {
+  .card {
+    max-width: 700px;
+    margin: 0 auto;
+
+    .title {
+      margin-bottom: 30px;
+    }
+
+    mat-card-content {
+      margin: 0 auto;
+      width: 60%;
+
+      mat-form-field {
+        width: 100%;
+
+        input[formControlName="email"] {
+          color: gray;
+        }
+      }
+
+      mat-radio-button {
+        margin: 10px 10px 20px 20px;
+      }
+
+      mat-card-actions {
+        text-align: center;
+      }
+    }
+  } 
+}
+
+@media(max-width: 576px) {
+  .page_body {
+    .card {
+      mat-card-content {
+        width: 90%;
+  
+        mat-radio-button {
+          margin-left: 10px;
+        }
+      }
+    } 
+  }
+}

@@ -51,6 +51,18 @@ export class FbAuthService {
     this.stream$.next(this.isSignedIn);
   }
 
+  public editDataInDb(user: User, userUID: string, userID: string): Observable<any> {
+    return this.http.put(`${fbUrl}/users/${userUID}/${userID}.json`, {
+      userFirstName: user.userFirstName,
+      userLastName: user.userLastName,
+      userEmail: user.userEmail,
+      userPassword: user.userPassword,
+      userBirth: user.userBirth,
+      userGender: user.userGender,
+      userUID: user.userUID
+    });
+  }
+
   public changeIsSignedIn(bool: boolean): void {
     this.isSignedIn = bool;
     this.stream$.next(this.isSignedIn);
