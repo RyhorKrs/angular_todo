@@ -25,7 +25,8 @@
     "sort-z": "from Z to A",
     "date-of-birth": "Date of birth",
     "male": "Male",
-    "female": "Female"
+    "female": "Female",
+    "color": "Select a color"
   },
   "placeholders": {
     "email": "example@mail.ru",
@@ -57,7 +58,9 @@
     "show-comments": "Show comments",
     "hide-comments": "Hide comments",
     "edit-comment": "Edit comment",
-    "save": "Save changes"
+    "save": "Save changes",
+    "select-photo": "Select Photo",
+    "delete-photo": "Delete photo"
   },
   "errors": {
     "required": "You should enter a value",
@@ -80,7 +83,10 @@
     "no-tasks": "No tasks",
     "deadline-date": "Date of deadline:",
     "edited": "edited",
-    "no-comments": "No comments yet..."
+    "no-comments": "No comments yet...",
+    "select-color-photo": "Choose a color for initials or photo display:",
+    "or": "or",
+    "no-photo": "No photo yet"
   },
   "content": {
     "home-page-subtitle": "Find clarity and peace of mind - move your tasks from your head to a to-do list (no matter where you are or what device you use).",

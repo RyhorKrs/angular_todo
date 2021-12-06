@@ -36,6 +36,29 @@
           <mat-radio-button value="woman">{{ 'form-field-label.female' | translate }}</mat-radio-button>
         </mat-radio-group>
 
+        <p>{{ 'messages.select-color-photo' | translate }}</p>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>{{ 'form-field-label.color' | translate }}</mat-label>
+          <input matInput type="color" formControlName="color">
+        </mat-form-field>
+
+        <p>{{ 'messages.or' | translate }}</p>
+
+        <div class="file">
+          <div class="file_item">
+            <input type="file" formControlName="photo" (change)="uploadPhoto($event)">
+            <button mat-raised-button>{{ 'buttons.select-photo' | translate }}</button>
+            <button *ngIf="userPhoto" mat-raised-button color="warn" class="delete_photo" (click)="userPhoto = ''">{{ 'buttons.delete-photo' | translate }}</button>
+          </div>
+          <div class="photo_preview">
+            <img *ngIf="userPhoto; else noPhotoText" [src]="userPhoto" alt="User photo preview">
+            <ng-template #noPhotoText>
+              <p class="no_photo">{{ 'messages.no-photo' | translate }}</p>
+            </ng-template>
+          </div>
+        </div>
+
         <mat-error class="error">{{ error }}</mat-error>
 
         <mat-card-actions>

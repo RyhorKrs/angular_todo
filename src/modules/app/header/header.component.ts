@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public language: string = 'en';
   public currentUser: string = '';
   public currentAvatar: string = '';
+  public userAvatarColor: string = '';
+  public userAvatarPhoto: string = '';
   public sub: Subscription | any;
 
   constructor (
@@ -44,6 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       let user = res[Object.keys(res)[0]];
       this.currentUser = user.userEmail;
       this.currentAvatar = user.userFirstName[0] + user.userLastName[0];
+      this.userAvatarPhoto = user.userPhoto;
+      this.userAvatarColor = user.userColor ? user.userColor : '#f44336';
     })
   }
 

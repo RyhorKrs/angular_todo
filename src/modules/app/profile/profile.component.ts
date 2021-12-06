@@ -14,6 +14,7 @@ import { User } from './../../../../src/shared/interfaces/USER';
 export class ProfileComponent implements OnInit, OnDestroy {
   public editProfileForm: FormGroup | any;
   public currentUser: any = {};
+  public userPhoto: any = '';
   public error: string = '';
   public sub: Subscription | any;
 
@@ -48,7 +49,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         Validators.required
       ]),
       birth: new FormControl(''),
-      gender: new FormControl('')
+      gender: new FormControl(''),
+      color: new FormControl(''),
+      photo: new FormControl('')
     });
   }
 
@@ -56,6 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.fbService.getDataFromDb(JSON.parse(localStorage.uid)).subscribe(res => {
       this.currentUser = res[Object.keys(res)[0]];
       this.currentUser.id = Object.keys(res)[0];
+      this.userPhoto = this.currentUser.userPhoto;
 
       let validBirth = this.currentUser.userBirth ? new Date(`${this.currentUser.userBirth.substr(3,2)}.${this.currentUser.userBirth.substr(0,2)}.${this.currentUser.userBirth.substr(6,4)}`) : '';
       let validGender = this.currentUser.userGender ? this.currentUser.userGender : '';
@@ -65,6 +69,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.editProfileForm.patchValue({email: this.currentUser.userEmail});
       this.editProfileForm.patchValue({birth: validBirth});
       this.editProfileForm.patchValue({gender: validGender});
+      this.editProfileForm.patchValue({color: this.currentUser.userColor});
     })
   }
 
@@ -78,6 +83,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       userPassword: this.currentUser.userPassword,
       userBirth: date,
       userGender: this.editProfileForm.value.gender,
+      userColor: this.editProfileForm.value.color,
+      userPhoto: this.userPhoto,
       userUID: this.currentUser.userUID
     };
     
@@ -85,5 +92,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.fbService.changeIsSignedIn(true);
       this.getUserData();
     })
+  }
+
+  public uploadPhoto(event: any): void {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.userPhoto = reader.result;
+    }
+    
+    reader.readAsDataURL(event.target.files[0]);
   }
 }

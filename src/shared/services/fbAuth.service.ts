@@ -59,6 +59,8 @@ export class FbAuthService {
       userPassword: user.userPassword,
       userBirth: user.userBirth,
       userGender: user.userGender,
+      userColor: user.userColor,
+      userPhoto: user.userPhoto,
       userUID: user.userUID
     });
   }

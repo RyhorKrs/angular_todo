@@ -5,6 +5,8 @@ export interface User {
   userPassword: string,
   userBirth?: string,
   userGender?: string,
+  userColor?: string,
+  userPhoto?: string,
   userUID?: string,
   id?: string
 };

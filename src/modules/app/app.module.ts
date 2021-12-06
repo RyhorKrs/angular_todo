@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
+import { FooterModule } from './footer/footer.module';
 import { HomeModule } from './home/home.module';
 import { TasksModule } from './tasks/tasks.module';
 import { ProfileModule } from './profile/profile.module';
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     MatButtonModule,
     HeaderModule,
+    FooterModule,
     HomeModule,
     TasksModule,
     ProfileModule,

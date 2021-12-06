@@ -10,7 +10,10 @@
       <a mat-raised-button routerLink='/sign-in'>{{ 'buttons.sign-in' | translate }}</a>
     </li>
     <li *ngIf='isSignIn' class='sign-in-li'>
-      <div [matMenuTriggerFor]="menu" class='user-avatar'><span>{{currentAvatar}}</span></div>
+      <div [matMenuTriggerFor]="menu" class='user-avatar' style="overflow: hidden;">
+        <span *ngIf='!userAvatarPhoto' [ngStyle]="{color: userAvatarColor}">{{currentAvatar}}</span>
+        <img *ngIf='userAvatarPhoto' [src]="userAvatarPhoto" alt="User photo">
+      </div>
       <mat-menu class='menu-body' #menu='matMenu' yPosition="above" xPosition="before">
         <p style="font-weight: 500; padding: 16px; margin: 0; width: 160px;">{{ 'messages.signed-in-as' | translate: {user: currentUser} }}</p>
         <hr>
